@@ -5,8 +5,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 })->name('home');;
+
 //halaman login
-Route::get('login', 'App\Http\Controllers\Login@index');
+Route::get('login', 'App\Http\Controllers\Admin\Login@index');
+Route::get('lupa-password', 'App\Http\Controllers\Admin\Login@lupa_password');
+
+// Dasbor
+Route::get('dasbor', 'App\Http\Controllers\Admin\Dasbor@index');
 
 // Berita
 Route::get('/berita', function () {
