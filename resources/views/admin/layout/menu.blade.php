@@ -1,9 +1,9 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{asset('admin/dasbor') }}" class="brand-link">
-      <img src="{{asset('dist/img/Logo_PLN.png') }}" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: 1.2">
-      <span class="brand-text font-weight-light">Admin Harmoni</span>
+    <a href="{{asset('dasbor') }}" class="brand-link">
+      <img src="{{asset('dist/img/Logo_PLN.png') }}" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Harmoni Administrator</span>
     </a>
 
     <!-- Sidebar -->
@@ -15,58 +15,35 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{asset('dasbor') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
-            <a href="{{ asset('admin/client') }}" class="nav-link">
+            <a href="{{ asset('user') }}" class="nav-link">
               <i class="nav-icon fas fa-user-check"></i>
               <p>
-                Client
-                <span class="right badge badge-danger">Customer</span>
+                User
+                <span class="right badge badge-danger">Administrator</span>
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ asset('admin/user') }}" class="nav-link">
-              <i class="nav-icon fas fa-user-lock"></i>
+              <i class="nav-icon fas fa-newspaper"></i>
               <p>
-                Pengguna
-                <span class="right badge badge-danger">Admin</span>
+                Berita
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ asset('admin/staff') }}" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
-                Staff
-                <span class="right badge badge-danger">Admin</span>
+                Buletin
               </p>
             </a>
           </li>
@@ -116,4 +93,4 @@
                   </button>
                 </div>
               </div>
-              <div class="card-body"></div>
+              <div class="card-body">

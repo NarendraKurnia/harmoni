@@ -13,6 +13,9 @@ Route::get('lupa-password', 'App\Http\Controllers\Admin\Login@lupa_password');
 // Dasbor
 Route::get('dasbor', 'App\Http\Controllers\Admin\Dasbor@index');
 
+// user
+Route::get('user', 'App\Http\Controllers\Admin\User@index');
+
 // Berita
 Route::get('/berita', function () {
     return view('berita.index');
