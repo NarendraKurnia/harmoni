@@ -32,7 +32,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ asset('admin/user') }}" class="nav-link">
+            <a href="{{ asset('berita') }}" class="nav-link">
               <i class="nav-icon fas fa-newspaper"></i>
               <p>
                 Berita

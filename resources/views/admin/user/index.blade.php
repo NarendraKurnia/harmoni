@@ -1,11 +1,23 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<!-- <p>
+  @include('admin/user/tambah')
+</p> -->
+<form action="{{ asset('admin/user/proses') }}" method="post" accept-charset="utf-8">
+{{ csrf_field() }}
 <div class="row">
 
+
   <div class="col-md-12">
-    <div class="btn-group">
-      <button class="btn btn-danger" type="submit" name="hapus" onClick="check();" >
-          <i class="fa fa-trash"></i>
-      </button> 
-        <a href="{{ asset('admin/user/tambah') }}" style="color: white;">
+    <div class="btn-group"> 
+        <a href="{{ asset('user/tambah') }}" style="color: white;">
         <button type="button" class="btn btn-success " data-toggle="modal" data-target="#Tambah">
             <i class="fa fa-plus"></i> Tambah User
         </a>
@@ -35,10 +47,10 @@
         <td><?php echo $user->akses_level ?></td>
         <td>
             <div class="btn-group">
-            <a href="{{ asset('admin/user/edit/'.$user->id_user) }}" 
+            <a href="{{ asset('user/edit/'.$user->id_user) }}" 
             class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
 
-            <a href="{{ asset('admin/user/delete/'.$user->id_user) }}" 
+            <a href="{{ asset('user/delete/'.$user->id_user) }}" 
             class="btn btn-danger btn-sm delete-link"><i class="fa fa-trash"></i>
             </a>
         </div>

@@ -18,7 +18,6 @@
   <!-- jQuery UI 1.11.4 -->
   <script src="{{ asset('jquery-ui/external/jquery/jquery.js') }}"></script>
    <!-- jQuery -->
-  <!-- <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script> -->
   <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
   <link href="{{ asset('plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
   <!-- sweetalert -->
@@ -28,6 +27,21 @@
   <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
   <!-- SweetAlert2 -->
   <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+  <!-- TinyMCE -->
+  <script src="{{ asset('tinymce/js/tinymce/tinymce.min.js') }}"></script>
+  <script>
+          tinymce.init({
+          selector: '#editor',  // ID textarea yang akan diubah menjadi TinyMCE
+          toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+          menubar: false,
+          forced_root_block: false, // Ini memastikan TinyMCE tidak menghapus isi textarea
+          setup: function(editor) {
+              editor.on('change', function() {
+                  tinymce.triggerSave(); // Pastikan TinyMCE menyimpan isi textarea
+              });
+          }
+      });
+  </script>
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse">
 <!-- Site wrapper -->
