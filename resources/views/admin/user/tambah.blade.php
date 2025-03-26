@@ -41,33 +41,20 @@
                         <input type="password" name="password" class="form-control" placeholder="Password" value="{{ old('password') }}" required>
                     </div>
                 </div>
-
-
                 <div class="form-group row">
-                    <label class="col-md-3 control-label text-right">Level Hak Akses</label>
+                    <label class="col-md-3 control-label text-right">Unit</label>
                     <div class="col-md-9">
-                        <select name="akses_level" class="form-control">
-                            <option value="Admin">Admin</option>
-                            <option value="UID Jatim">UID Jatim</option>
-							<option value="UP3 SBU">UP3 SBU</option>
-                            <option value="UP3 SBS">UP3 SBS</option>
-                            <option value="UP3 SBB">UP3 SBB</option>
-                            <option value="UP3 Mojokerto">UP3 Mojokerto</option>
-                            <option value="UP3 Gresik">UP3 Gresik</option>
-                            <option value="UP3 Madura">UP3 Madura</option>
-                            <option value="UP3 Banyuwangi">UP3 Banyuwangi</option>
-                            <option value="UP2D">UP2D</option>
-                            <option value="UP3 Malang">UP3 Malang</option>
-                            <option value="UP3 Sidoarjo">UP3 Sidoarjo</option>
-                            <option value="UP3 Madiun">UP3 Madiun</option>
-                            <option value="UP3 Pasuruan">UP3 Pasuruan</option>
-                            <option value="UP3 Bojonegoro">UP3 Bojonegoro</option>
-                            <option value="UP3 Kediri">UP3 Kediri</option>
-                            <option value="UP3 Ponorogo">UP3 Ponorogo</option>
-                            <option value="UP3 Situbondo">UP3 Situbondo</option>
-                        </select>
-                    </div>
-                </div>
+                    @if(isset($units) && count($units) > 0)
+                    <select name="unit_id" class="form-control">
+                        @foreach ($units as $unit)
+                            <option value="{{ $unit->id_unit }}">{{ $unit->nama }}</option>
+                        @endforeach
+                    </select>
+                    @else
+                    <p class="text-danger">Data unit tidak tersedia.</p>
+                @endif
+                    </div>  
+            </div>
 
                 <div class="form-group row">
                     <label class="col-md-3 control-label text-right"></label>

@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\DB;
 class User_model extends Model
 {
     use HasFactory;
+    protected $table = 'users';
+    protected $fillable = ['nama', 'email', 'username', 'password', 'unit_id'];
+
+    public function unit()
+    {
+    return $this->belongsTo(Unit::class, 'unit_id', 'id_unit'); 
+    }
 
     //listing
     public function listing()

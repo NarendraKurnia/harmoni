@@ -45,33 +45,26 @@
                     </div>
                 </div>
 
-
                 <div class="form-group row">
-                    <label class="col-md-3 control-label text-right">Level Hak Akses</label>
-                    <div class="col-md-9">
-                        <select name="akses_level" class="form-control">
-                            <option value="Admin">Admin</option>
-                            <option value="UID Jatim" <?php if($user->akses_level=='UID Jatim'){ echo 'selected'; } ?>>UID Jatim</option>
-							<option value="UP3 SBU" <?php if($user->akses_level=='UP3 SBU'){ echo 'selected'; } ?>>UP3 SBU</option>
-                            <option value="UP3 SBS" <?php if($user->akses_level=='UP3 SBS'){ echo 'selected'; } ?>>UP3 SBS</option>
-                            <option value="UP3 SBB" <?php if($user->akses_level=='UP3 SBB'){ echo 'selected'; } ?>>UP3 SBB</option>
-                            <option value="UP3 Mojokerto" <?php if($user->akses_level=='UP3 Mojokerto'){ echo 'selected'; } ?>>UP3 Mojokerto</option>
-                            <option value="UP3 Gresik" <?php if($user->akses_level=='UP3 Gresik'){ echo 'selected'; } ?>>UP3 Gresik</option>
-                            <option value="UP3 Madura" <?php if($user->akses_level=='UP3 Madura'){ echo 'selected'; } ?>>UP3 Madura</option>
-                            <option value="UP3 Banyuwangi" <?php if($user->akses_level=='UP3 Banyuwangi'){ echo 'selected'; } ?>>UP3 Banyuwangi</option>
-                            <option value="UP2D" <?php if($user->akses_level=='UP2D'){ echo 'selected'; } ?>>UP2D</option>
-                            <option value="UP3 Malang" <?php if($user->akses_level=='UP3 Malang'){ echo 'selected'; } ?>>UP3 Malang</option>
-                            <option value="UP3 Sidoarjo" <?php if($user->akses_level=='UP3 Sidoarjo'){ echo 'selected'; } ?>>UP3 Sidoarjo</option>
-                            <option value="UP3 Madiun" <?php if($user->akses_level=='UP3 Madiun'){ echo 'selected'; } ?>>UP3 Madiun</option>
-                            <option value="UP3 Pasuruan" <?php if($user->akses_level=='UP3 Pasuruan'){ echo 'selected'; } ?>>UP3 Pasuruan</option>
-                            <option value="UP3 Bojonegoro" <?php if($user->akses_level=='UP3 Bojonegoro'){ echo 'selected'; } ?>>UP3 Bojonegoro</option>
-                            <option value="UP3 Kediri" <?php if($user->akses_level=='UP3 Kediri'){ echo 'selected'; } ?>>UP3 Kediri</option>
-                            <option value="UP3 Ponorogo" <?php if($user->akses_level=='UP3 Ponorogo'){ echo 'selected'; } ?>>UP3 Ponorogo</option>
-                            <option value="UP3 Situbondo" <?php if($user->akses_level=='UP3 Situbondo'){ echo 'selected'; } ?>>UP3 Situbondo</option>
+                    <label class="col-md-3 control-label text-right">Unit</label>
+                    <div class="col-md-6">
+                        @if(isset($units) && count($units) > 0)
+                        <select name="unit_id" class="form-control">
+                            <option value="">Pilih Unit</option>
+                            @foreach ($units as $unit)
+                                <option value="{{ $unit->id_unit }}" 
+                                    {{ old('unit_id', $user->unit_id ?? '') == $unit->id_unit ? 'selected' : '' }}>
+                                    {{ $unit->nama }}
+                                </option>
+                            @endforeach
                         </select>
+                        @else
+                        <p class="text-danger">Data unit tidak tersedia.</p>
+                        @endif
+                        <small class="text-secondary">Kategori</small>
                     </div>
                 </div>
-
+                
                 <div class="form-group row">
                     <label class="col-md-3 control-label text-right"></label>
                     <div class="col-md-9">

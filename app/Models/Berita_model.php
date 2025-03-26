@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class Berita_model extends Model
 {
+    use HasFactory;
+    protected $table = 'berita';
+    protected $fillable = ['judul', 'isi', 'gambar', 'unit_id'];
+
+    public function unit()
+    {
+    return $this->belongsTo(Unit::class, 'unit_id', 'id_unit'); // Pastikan unit_id cocok dengan id_unit
+    }
     //listing
     public function listing()
     {

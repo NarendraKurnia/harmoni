@@ -29,15 +29,18 @@ Route::get('berita/edit/{id}', 'App\Http\Controllers\Admin\Berita@edit');
 Route::post('berita/proses-edit', 'App\Http\Controllers\Admin\Berita@proses_edit');
 Route::get('berita/delete/{id}', 'App\Http\Controllers\Admin\Berita@delete');
 
+// User Buletin
+Route::get('buletin', 'App\Http\Controllers\Admin\Buletin@index');
+
 // Berita
 // Route::get('/berita', function () {
 //     return view('berita.index');
 // })->name('berita.index');
 
-// Buletin
-Route::get('/buletin', function () {
-    return view('buletin.index');
-})->name('buletin.index');
+// // Buletin
+// Route::get('/buletin', function () {
+//     return view('buletin.index');
+// })->name('buletin.index');
 
 // Tentang Kami
 Route::get('/tentangkami', function () {

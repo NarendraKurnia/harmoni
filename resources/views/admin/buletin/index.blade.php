@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <form action="{{ url('berita') }}" method="get">
+        <form action="{{ url('buletin') }}" method="get">
         <div class="input-group">
             <input type="text" name="keywords" class="form-control" placeholder="Cari berita..." value="{{ request('keywords') }}">
             <span class="input-group-append">
@@ -47,35 +47,39 @@
         <tr class="text-left bg-light">
             <th width="5%" class="text-center">NO</th>
             <th width="10%">Gambar</th>
-            <th width="20%">Judul</th>
+            <th width="15%">Judul</th>
+            <th width="10%">Edisi</th>
             <th width="25%">Isi</th>
-            <th width="15%">Unit</th>
+            <th width="10%">Unit</th>
+            <th width="10%">Link Buletin</th>
             <th width="10%">Update</th>
             <th width="5%">Action</th>
         </tr>
     </thead>
     <tbody>
         @php $no = 1; @endphp
-        @foreach($berita as $item)
+        @foreach($buletin as $buletin)
         <tr>
             <td class="text-center">{{ $no }}</td>
             <td class="text-center">
-                @if($item->gambar)
-                    <img src="{{ asset('upload/berita/'.$item->gambar) }}" class="img img-fluid img-thumbnail" alt="Gambar {{ $item->judul }}" style="max-width: 100px;">
+                @if($buletin->gambar)
+                    <img src="{{ asset('upload/buletin/'.$buletin->gambar) }}" class="img img-fluid img-thumbnail" alt="Gambar {{ $buletin->judul }}" style="max-width: 100px;">
                 @else
                     <span class="badge badge-warning">Tidak ada</span>
                 @endif
             </td>
-            <td>{{ $item->judul }}</td>
-            <td>{{ Str::limit($item->isi, 1000) }}</td> {{-- Isi berita dipotong jika terlalu panjang --}}
-            <td>{{ $item->unit ? $item->unit->nama : 'Tidak ada unit' }}</td>
-            <td>{{ $item->tanggal_update ?? '-' }}</td> {{-- Gunakan tanda '-' jika null --}}
+            <td>{{ $buletin->judul }}</td>
+            <td>{{ $buletin->edisi }}</td>
+            <td>{{ Str::limit($buletin->isi, 1000) }}</td> {{-- Isi berita dipotong jika terlalu panjang --}}
+            <td>{{ $buletin->unit ? $buletin->unit->nama : 'Tidak ada unit' }}</td>
+            <td>{{ $buletin->link_buletin }}</td>
+            <td>{{ $buletin->tanggal_update ?? '-' }}</td> {{-- Gunakan tanda '-' jika null --}}
             <td>
                 <div class="btn-group">
-                    <a href="{{ url('berita/edit/'.$item->id_berita) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ url('berita/edit/'.$buletin->id_buletin) }}" class="btn btn-warning btn-sm">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a href="{{ url('berita/delete/'.$item->id_berita) }}" class="btn btn-danger btn-sm delete-link">
+                    <a href="{{ url('berita/delete/'.$buletin->id_buletin) }}" class="btn btn-danger btn-sm delete-link">
                         <i class="fa fa-trash"></i>
                     </a>
                 </div>

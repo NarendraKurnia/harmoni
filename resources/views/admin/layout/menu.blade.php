@@ -40,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ asset('admin/staff') }}" class="nav-link">
+            <a href="{{ asset('buletin') }}" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Buletin

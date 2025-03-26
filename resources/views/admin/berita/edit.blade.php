@@ -26,7 +26,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 control-label text-right">Isi Proyek</label>
                     <div class="col-md-9">
-                        <textarea id="editor" name="isi" value="{{ $berita->isi }}"></textarea>
+                        <textarea id="editor" name="isi" class="form-control">{!! old('isi', $berita->isi) !!}</textarea>
                     </div>
                 </div>
 
@@ -40,55 +40,15 @@
                 <div class="form-group row">
                     <label class="col-md-3 control-label text-right">Unit</label>
                     <div class="col-md-6">
-                        <select name="unit" class="form-control select2" value="{{ $berita->unit }}">
-                                        <option value="UID Jatim">
-                                UID Jatim			</option>
-                                        <option value="UP3 Surabaya Utara">
-                                UP3 SBU			</option>
-                                        <option value="UP3 Surabaya Selatan">
-                                UP3 SBS			</option>
-                                        <option value="UP3 Surabaya Barat">
-                                UP3 SBB			</option>
-                                        <option value="UP3 Mojokerto">
-                                UP3 Mojokerto	
-                                                </option>
-                                        <option value="UP3 Gresik">
-                                UP3 Gresik			
-                                                </option>
-                                        <option value="UP3 Madura">
-                                UP3 Madura			
-                                                </option>
-                                        <option value="UP3 Banyuwangi">
-                                UP3 Banyuwangi			
-                                                </option>
-                                        <option value="UP2D">
-                                UP2D			
-                                                </option>
-                                        <option value="UP3 Malang">
-                                UP3 Malang			
-                                                </option>
-                                        <option value="UP3 Sidoarjo">
-                                UP3 Sidoarjo			
-                                                </option>
-                                        <option value="UP3 Madiun">
-                                UP3 Madiun			
-                                                </option>
-                                        <option value="UP3 Pasuruan">
-                                UP3 Pasuruan			
-                                                </option>
-                                        <option value="UP3 Bojonegoro">
-                                UP3 Bojonegoro			
-                                                </option>
-                                        <option value="UP3 Kediri">
-                                UP3 Kediri			
-                                                </option>
-                                        <option value="UP3 Ponorogo">
-                                UP3 Ponorogo			
-                                                </option>
-                                        <option value="UP3 Situbondo">
-                                UP3 Situbondo			
-                                                </option>
-                                    </select>
+                        <select name="unit_id" class="form-control">
+                            <option value="">Pilih Unit</option>
+                            @foreach($units as $unit)
+                                <option value="{{ $unit->id_unit }}" 
+                                    {{ old('unit_id', $berita->unit_id) == $unit->id_unit ? 'selected' : '' }}>
+                                    {{ $unit->nama }}
+                                </option>
+                            @endforeach
+                        </select>
                         <small class="text-secondary">Kategori</small>
                     </div>
                 </div>

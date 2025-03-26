@@ -7,49 +7,61 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\User_model;
+use App\Models\Unit;
 
 class User extends Controller
 {
+    
     //index
-    public function index()
+    public function index(Request $request)
     {
-        $m_user       = new User_model();
-        $user         = $m_user->listing();
+         // Query utama berita
+        $query = User_model::with('unit')->orderBy('id_user', 'DESC');
 
-        $data = [ 'title'      => 'Data User Administrator',
-                  'user'       => $user,
-                  'content'    => 'admin/user/index'
-                ];
-        return view('admin/layout/wrapper',$data);
+        // Ambil data berita dengan pagination
+        $user = $query->paginate(10); 
+
+        // Data yang dikirim ke view
+        $data = [ 
+            'title'   => 'Data User Administrator',
+            'user'  => $user,
+            'content' => 'admin/user/index'
+        ];
+
+        return view('admin/layout/wrapper', $data);
     }
-    // tambah
     public function tambah()
     {
-        $m_user       = new User_model();
-        
-        $data = [ 'title'      => 'Tambah Data User Administrator',
-                  'content'    => 'admin/user/tambah'
-                ];
-        return view('admin/layout/wrapper',$data);
+        $units = Unit::select('id_unit', 'nama')->get(); // Mengambil semua unit dari database
+
+        $data = [ 
+            'title'   => 'Tambah Data User Administrator',
+            'units'   => $units, // Mengirim variabel $units ke view
+            'content' => 'admin/user/tambah'
+        ];
+
+        return view('admin/layout/wrapper', $data);
     }
 
     // proses_tambah
     public function proses_tambah(Request $request)
 
     {
+        $units = \App\Models\Unit::select('id_unit', 'nama')->get();
         $m_user     = new User_model();
         request()->validate([
                             'username'      => 'required|unique:users',
 					        'email'         => 'required|unique:users',
 					        'nama'          => 'required',
                             'password'      => 'required',
+                            'unit_id' => 'required|exists:units,id_unit'
                                     ]);
         // proses data input
         $data   = [     'nama'          => $request->nama,
                         'email'	        => $request->email,
                         'username'   	=> $request->username,
                         'password'      => sha1($request->password),
-                        'akses_level'  	=> $request->akses_level,
+                        'unit_id'       => $request->unit_id,
 
                     ];
         $m_user->tambah($data);
@@ -59,11 +71,13 @@ class User extends Controller
     // edit
     public function edit($id_user)
     {
+        $units = \App\Models\Unit::select('id_unit', 'nama')->get();
         $m_user       = new User_model();
         $user         = $m_user->detail($id_user);
         
         $data = [ 'title'      => 'Edit User Administrator',
                   'user'       => $user,
+                  'units'   => $units,
                   'content'    => 'admin/user/edit'
                 ];
         return view('admin/layout/wrapper',$data);
@@ -88,7 +102,7 @@ class User extends Controller
                          'email'	     => $request->email,
                          'username'   	 => $request->username,
                          'password'      => sha1($request->password),
-                         'akses_level'   => $request->akses_level,
+                         'unit_id'       => $request->unit_id
  
                      ];
 
@@ -98,7 +112,7 @@ class User extends Controller
                          'nama'          => $request->nama,
                          'email'	     => $request->email,
                          'username'   	 => $request->username,
-                         'akses_level'   => $request->akses_level,
+                         'unit_id'       => $request->unit_id,
  
                      ];
 

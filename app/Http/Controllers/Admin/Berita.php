@@ -7,27 +7,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Berita_model;
+use App\Models\Unit;
 
 class Berita extends Controller
 {
     //index
-    public function index()
+    public function index(Request $request)
     {
-        $m_berita         = new Berita_model();
-        $berita           = $m_berita->listing();
+        // Query utama berita
+        $query = Berita_model::with('unit')->orderBy('id_berita', 'DESC');
 
-        $data = [ 'title'      => 'Data Berita',
-                  'berita'     => $berita,
-                  'content'    => 'admin/berita/index'
-                ];
-        return view('admin/layout/wrapper',$data);
+        // Jika ada input pencarian, filter berdasarkan judul atau isi berita
+        if ($request->has('keywords')) {
+            $keywords = $request->keywords;
+            $query->where(function($q) use ($keywords) {
+                $q->where('judul', 'like', "%{$keywords}%")
+                ->orWhere('isi', 'like', "%{$keywords}%");
+            });
+        }
+
+        // Ambil data berita dengan pagination
+        $berita = $query->paginate(10); 
+
+        // Data yang dikirim ke view
+        $data = [ 
+            'title'   => 'Data Berita',
+            'berita'  => $berita,
+            'content' => 'admin/berita/index'
+        ];
+
+        return view('admin/layout/wrapper', $data);
     }
     // tambah
     public function tambah()
     {
+        $units = \App\Models\Unit::select('id_unit', 'nama')->get();
         $m_berita       = new Berita_model();
         
         $data = [ 'title'      => 'Tambah Data Berita',
+                  'units'      => $units,
                   'content'    => 'admin/berita/tambah'
                 ];
         return view('admin/layout/wrapper',$data);
@@ -37,12 +55,13 @@ class Berita extends Controller
     public function proses_tambah(Request $request)
 
     {
+        $units = \App\Models\Unit::select('id_unit', 'nama')->get();
         $m_berita     = new Berita_model();
         request()->validate([
-                                    'judul'      => 'required',
-					                'isi'        => 'required',
-					                'gambar'     => 'file|image|mimes:jpeg,png,jpg|max:8024',
-                                    'unit'       => 'required',
+                                    'judul'   => 'required',
+                                    'isi'     => 'required',
+                                    'gambar'  => 'nullable|file|image|mimes:jpeg,png,jpg|max:8024',
+                                    'unit_id' => 'required|exists:units,id_unit'
                                     ]);
         // proses data input
         $image                  = $request->file('gambar');
@@ -53,10 +72,10 @@ class Berita extends Controller
             $destinationPath = 'admin/upload/berita/';
             $image->move($destinationPath, $input['nama_file']);
 
-        $data   = [     'judul'          => $request->judul,
+        $data   = [     'judul'         => $request->judul,
                         'isi'	        => $request->isi,
-                        'unit'  	=> $request->unit,
-                        'gambar'   	=> $input['nama_file']
+                        'unit_id'       => $request->unit_id,
+                        'gambar'   	    => $input['nama_file']
                     ];
                   }              
         $m_berita->tambah($data);
@@ -66,11 +85,13 @@ class Berita extends Controller
     // edit
     public function edit($id_berita)
     {
+        $units = \App\Models\Unit::select('id_unit', 'nama')->get();
         $m_berita       = new Berita_model();
         $berita         = $m_berita->detail($id_berita);
         
         $data = [ 'title'      => 'Edit Berita',
                   'berita'     => $berita,
+                  'units' => $units,
                   'content'    => 'admin/berita/edit'
                 ];
         return view('admin/layout/wrapper',$data);
@@ -79,11 +100,12 @@ class Berita extends Controller
     public function proses_edit(Request $request)
 
     {
+        $units = \App\Models\Unit::select('id_unit', 'nama')->get();
          $m_berita     = new Berita_model();
          request()->validate([
                              'judul'      => 'required',
                              'isi'        => 'required',
-                             'unit'       => 'required',
+                             'unit_id' => 'required|exists:units,id_unit',
                              'gambar'     => 'nullable|file|image|mimes:jpeg,png,jpg|max:8024',
                             ]);
          // proses data input
@@ -98,7 +120,7 @@ class Berita extends Controller
                          'judul'         => $request->judul,
                          'isi'	         => $request->isi,
                          'gambar'   	 => $input['nama_file'],
-                         'unit'          => $request->unit
+                         'unit_id' => $request->unit_id,
                      ];
 
         }else{   
@@ -106,7 +128,7 @@ class Berita extends Controller
             $data   = [  'id_berita'     => $request->id_berita,
                          'judul'         => $request->judul,
                          'isi'	         => $request->isi,
-                         'unit'          => $request->unit,
+                         'unit_id' => $request->unit_id,
                      ];
 
         }
