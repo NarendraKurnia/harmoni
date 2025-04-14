@@ -139,7 +139,7 @@
         </div>
     </div>
 </section>
-<!-- content terus berkembang -->
+<!-- Buletin -->
 <div class="container-fluid terusberkembang">
     <h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;">Buletin Terkini</h1>
     <hr style="border: none; height: 5px; background-color: #fbfb18; width: 20%; margin: auto; box-shadow: 0px 2px 5px rgba(0,0,0,0.2);">
@@ -152,167 +152,27 @@
         </div>
         <!-- isi konten slide 1 -->
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="container mt-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/buletin1.png') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/buletin2.png') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/buletin3.png') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
+    <div class="carousel-item active">
+        <div class="container mt-4">
+            <div class="row">
+                @foreach($buletins as $buletin)
+                <div class="col-md-4 mb-4">
+                    <div class="news-cardterusbekembang">
+                        <img src="{{ asset('storage/' . $buletin->gambar) }}" alt="{{ $buletin->judul }}">
+                        <div class="news-textterusbekembang">
+                            <h3>{{ $buletin->judul }}</h3>
+                            <h5 class="text-justify">{{ Str::limit(strip_tags($buletin->isi), 100) }}</h5>
+                            <a class="nav-link-active lihat-detailbuletin" href="{{ route('home') }}">
+                                Lihat Detail <i class="bi bi-arrow-right-short"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
-            <!-- slide 2 -->
-            <div class="carousel-item">
-                <div class="container mt-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN">
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <h5 class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque qui corporis sit ipsa numquam nulla debitis esse, voluptate vel porro ratione, necessitatibus? Sunt ut facere nihil veniam impedit repudiandae. Ad!</h5>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
+</div>
             <!-- navigasi carousel -->
             <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -343,7 +203,7 @@
               <img src="{{ asset('umum/images/beritasbb.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">25 Januari 2024</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 Bulan K3 Nasional, PLN Wujudkan Zero Accident dengan Meningkatkan Budaya Keselamatan Kerja
 				</a>
                 <p class="terkiniu-text">Peringati Bulan Kesehatan dan Keselamatan Kerja (K3) Nasional 2024, PT PLN (Persero) Unit Induk Distribusi (UID) Jawa Timur berkomitmen untuk meningkatkan budaya keselamatan kerja. Hal ini guna mewujudkan nihil kecelakaan kerja...</p>
@@ -355,7 +215,7 @@
               <img src="{{ asset('umum/images/beritasbb2.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">22 Desember 2024</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 PIKK PLN Surabaya Barat Tingkatkan Ketrampilan Desain Dalam Berdayakan Perempuan
 				</a>
                 <p class="terkiniu-text">Dalam rangka memperingati Hari Ulang Tahun (HUT) ke-25 Persatuan Istri Karyawan dan Karyawati (PIKK) PLN serta Hari Ibu, PIKK PLN Surabaya Barat menggelar pelatihan desain grafis menggunakan Canva. Acara ini dihadiri oleh anggota PIKK dari Seluruh Unit Pelaksana di Unit Induk Distribusi (UID) Jawa Timur melalui zoom di kantor UP3 Surabaya Barat, pada Minggu (22/12)...</p>
@@ -367,7 +227,7 @@
               <img src="{{ asset('umum/images/beritasbb4.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">20 Desember 2024</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 GELAR SUNAT MASSAL, PLN GANDENG YBM ISI LIBURAN SEKOLAH “ANAK HEBAT MENJEJAK MANFAAT BERSAMA SUPERHERO
 				</a>
                 <p class="terkiniu-text">Dalam rangka mengisi liburan sekolah PLN Surabaya Barat kembali menunjukkan komitmennya dalam menjalankan program Social Kemanusiaan dengan menggelar acara sunat massal bagi anak-anak dhuafa dengan tema “Anak Hebat Menjejak Manfaat Bersama Superhero.”</p>
@@ -379,7 +239,7 @@
               <img src="{{ asset('umum/images/beritasbb5.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">18 Desember 2024</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 PLN Surabaya Barat Gelar Apel Pasukan P2TL untuk Tingkatkan Keandalan Layanan
 				</a>
                 <p class="terkiniu-text">PT PLN (Persero) Unit Pelaksana Pelayanan Pelanggan (UP3) Surabaya Barat menggelar apel pasukan Penertiban Pemakaian Tenaga Listrik (P2TL) di halaman kantornya dengan bertujuan untuk memastikan keandalan pasokan listrik dan mengurangi potensi pelanggaran penggunaan listrik oleh pelanggan...</p>
@@ -391,7 +251,7 @@
               <img src="{{ asset('umum/images/beritasbb6.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">30 November 2024</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 Sambut Nataru, PLN Berbagi Kebahagiaan Sambungkan Listrik Gratis ke Warga Tidak Mampu
 				</a>
                 <p class="terkiniu-text">Sambut Natal dan Tahun Baru (Nataru), PT PLN (Persero) Unit Induk Distribusi (UID) Jawa Timur berbagi kebahagiaan dengan sambung listrik gratis warga tidak mampu di Jawa Timur. Melalui program bertajuk _Light Up The Dream_ (LUTD), PLN memberikan sambungan listrik gratis kepada 28 warga tidak mampu di Surabaya, Bojonegoro, Banyuwangi, Malang, Kediri, Madura, Situbondo, Gresik, Sidoarjo dan Ponorogo...</p>
@@ -403,7 +263,7 @@
               <img src="{{ asset('umum/images/beritasbb9.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">29 November 2024</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 PLN Sukses Kawal Pasokan Listrik di Pilkada di Jawa Timur
 				</a>
                 <p class="terkiniu-text">PT PLN (Persero) Unit Induk Distribusi (UID) Jawa Timur sukses kawal pasokan listrik di Pemilihan Umum Kepala Daerah (Pilkada) Serentak di Jawa Timur pada Rabu (27/11/2024).</p>
@@ -422,7 +282,7 @@
               <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
 				</a>
                 <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
@@ -434,7 +294,7 @@
               <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
 				</a>
                 <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
@@ -446,7 +306,7 @@
               <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
               <div class="news-terkiniu">
                 <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
+                <a href="{{ route('home') }}" target="_blank" class="berita-title">
                 Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
 				</a>
                 <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>

@@ -25,4 +25,33 @@ class Buletinadmin_model extends Model
             ->get();
         return $query;
     }
+    // tambah 
+    public function tambah ($data)
+    {
+        DB::table('buletins')
+            ->insert($data);
+    }
+    // detail
+    public function detail($id_buletin)
+    {
+        $query = DB::table('buletins')
+            ->select('*')
+            ->where('id_buletin', $id_buletin)
+            ->orderBy('id_buletin','DESC')
+            ->first();
+        return $query;
+    }
+    public function edit($data)
+    {
+    DB::table('buletins')
+        ->where('id_buletin', $data['id_buletin']) // <-- ERROR jika tidak ada 'id_buletin'
+        ->update($data);
+    }
+    // hapus
+    public function hapus ($data)
+    {
+        DB::table('buletins')
+            ->where('id_buletin',$data['id_buletin'])
+            ->delete();
+    }
 }

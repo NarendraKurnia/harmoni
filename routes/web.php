@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\Admin\Berita;
+use App\Http\Controllers\Admin\Buletin;
+use App\Http\Controllers\Admin\User;
+use App\Http\Controllers\Umum\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');;
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 //halaman login
 Route::get('login', 'App\Http\Controllers\Admin\Login@index');
 Route::get('lupa-password', 'App\Http\Controllers\Admin\Login@lupa_password');
+Route::post('cek-login', 'App\Http\Controllers\Admin\Login@cek_login');
+Route::get('logout', 'App\Http\Controllers\Admin\Login@logout');
 
 // Dasbor
 Route::get('dasbor', 'App\Http\Controllers\Admin\Dasbor@index');
@@ -19,7 +23,7 @@ Route::get('user/tambah', 'App\Http\Controllers\Admin\User@tambah');
 Route::post('user/proses-tambah', 'App\Http\Controllers\Admin\User@proses_tambah');
 Route::get('user/edit/{id}', 'App\Http\Controllers\Admin\User@edit');
 Route::post('user/proses-edit', 'App\Http\Controllers\Admin\User@proses_edit');
-Route::get('user/delete/{id}', 'App\Http\Controllers\Admin\User@delete');
+Route::post('user/delete/{id}', [User::class, 'delete'])->name('user.delete');
 
 // User Berita
 Route::get('berita', 'App\Http\Controllers\Admin\Berita@index');
@@ -28,9 +32,15 @@ Route::post('berita/proses-tambah', 'App\Http\Controllers\Admin\Berita@proses_ta
 Route::get('berita/edit/{id}', 'App\Http\Controllers\Admin\Berita@edit');
 Route::post('berita/proses-edit', 'App\Http\Controllers\Admin\Berita@proses_edit');
 Route::get('berita/delete/{id}', 'App\Http\Controllers\Admin\Berita@delete');
+Route::post('berita/delete/{id}', [Berita::class, 'delete'])->name('berita.delete');
 
 // User Buletin
 Route::get('buletin', 'App\Http\Controllers\Admin\Buletin@index');
+Route::get('buletin/tambah', 'App\Http\Controllers\Admin\Buletin@tambah');
+Route::post('buletin/proses-tambah', 'App\Http\Controllers\Admin\Buletin@proses_tambah');
+Route::get('buletin/edit/{id}', 'App\Http\Controllers\Admin\Buletin@edit');
+Route::post('buletin/proses-edit', 'App\Http\Controllers\Admin\Buletin@proses_edit');
+Route::post('buletin/delete/{id}', [Buletin::class, 'delete'])->name('buletin.delete');
 
 // Berita
 // Route::get('/berita', function () {

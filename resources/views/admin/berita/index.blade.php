@@ -75,9 +75,31 @@
                     <a href="{{ url('berita/edit/'.$item->id_berita) }}" class="btn btn-warning btn-sm">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a href="{{ url('berita/delete/'.$item->id_berita) }}" class="btn btn-danger btn-sm delete-link">
-                        <i class="fa fa-trash"></i>
-                    </a>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target={{"#exampleModal" . $item->id_berita}}>
+                    <i class="fa fa-trash"></i>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id={{"exampleModal" . $item->id_berita}} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Data Yang di Hapus Tidak Dapat Dikembalikan!!!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="{{ route('berita.delete', $item->id_berita) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Hapus Data</button>
+                        </form>
+                    </div>
+                    </div>
                 </div>
             </td>
         </tr>

@@ -192,5 +192,6 @@ $awal = $sek-100;
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="{{ asset('assets/admin/dist/js/demo.js') }}"></script> -->
+ <!-- grafik -->
 </body>
 </html>

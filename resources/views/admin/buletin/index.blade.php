@@ -17,7 +17,7 @@
                 <button type="submit" class="btn btn-info btn-flat">
                     <i class="fa fa-search"></i> Cari
                 </button>
-                <a href="{{ url('berita/tambah') }}" class="btn btn-success">
+                <a href="{{ url('buletin/tambah') }}" class="btn btn-success">
                     <i class="fa fa-plus"></i> Tambah Baru
                 </a>
             </span>
@@ -76,12 +76,37 @@
             <td>{{ $buletin->tanggal_update ?? '-' }}</td> {{-- Gunakan tanda '-' jika null --}}
             <td>
                 <div class="btn-group">
-                    <a href="{{ url('berita/edit/'.$buletin->id_buletin) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ url('buletin/edit/'.$buletin->id_buletin) }}" class="btn btn-warning btn-sm">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a href="{{ url('berita/delete/'.$buletin->id_buletin) }}" class="btn btn-danger btn-sm delete-link">
-                        <i class="fa fa-trash"></i>
-                    </a>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target={{"#exampleModal" . $buletin->id_buletin}}>
+                    <i class="fa fa-trash"></i>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id={{"exampleModal" . $buletin->id_buletin}} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    Data Yang di Hapus Tidak Dapat Dikembalikan!!!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="{{ route('buletin.delete', $buletin->id_buletin) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Hapus Data</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
                 </div>
             </td>
         </tr>

@@ -1,5 +1,5 @@
 <p class="text-right">
-	<a href="{{ asset('berita') }}" class="btn btn-outline-info btn-sm">
+	<a href="{{ asset('buletin') }}" class="btn btn-outline-info btn-sm">
 		<i class="fa fa-arrow-left"></i> Kembali
 	</a>
 </p>
@@ -12,19 +12,26 @@
         </ul>
     </div>
 @endif
-<form action="{{ asset('berita/proses-tambah') }}" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+<form action="{{ asset('buletin/proses-tambah') }}" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 {{ csrf_field() }}
 <input type="hidden" name="csrf_test_name" value="155e3af88478230f860a934020e9214a">
 
 <div class="form-group row">
-	<label class="col-md-3">Judul Berita</label>
+	<label class="col-md-3">Judul Buletin</label>
 	<div class="col-md-9">
 		<input type="text" name="judul" class="form-control" value="{{ old('judul') }}" required>
 	</div>
 </div>
 
 <div class="form-group row">
-    <label class="col-md-3">Isi Proyek</label>
+	<label class="col-md-3">Edisi Buletin</label>
+	<div class="col-md-9">
+		<input type="text" name="edisi" class="form-control" value="{{ old('edisi') }}" required>
+	</div>
+</div>
+
+<div class="form-group row">
+    <label class="col-md-3">Isi Buletin</label>
     <div class="col-md-9">
         <textarea id="editor" name="isi" required>{{ old('isi') }}</textarea>
     </div>
@@ -33,7 +40,7 @@
 <div class="form-group row">
 	<label class="col-md-3">Upload Foto Berita</label>
 	<div class="col-md-6">
-	<input type="file" name="gambar" class="form-control" placeholder="Upload Foto" value="{{ old('gambar') }}" required>
+	<input type="file" name="gambar" class="form-control" placeholder="Upload Foto" value="{{ old('gambar') }}"required>
 	</div>
 </div>
 
@@ -47,6 +54,13 @@
             @endforeach
         </select>
     </div>
+</div>
+
+<div class="form-group row">
+	<label class="col-md-3">Link Buletin</label>
+	<div class="col-md-9">
+		<input type="text" name="link_buletin" class="form-control" value="{{ old('link_buletin') }}" required>
+	</div>
 </div>
 
 <div class="form-group row">

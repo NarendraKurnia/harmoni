@@ -11,32 +11,36 @@ use App\Models\Unit;
 
 class User extends Controller
 {
-    
-    //index
+    // Index
     public function index(Request $request)
     {
-         // Query utama berita
         $query = User_model::with('unit')->orderBy('id_user', 'DESC');
-
-        // Ambil data berita dengan pagination
         $user = $query->paginate(10); 
-
-        // Data yang dikirim ke view
+    
+        $unit_id = session()->get('unit_id');
+        $unit = Unit::where('id_unit', $unit_id)->first();
+    
         $data = [ 
             'title'   => 'Data User Administrator',
-            'user'  => $user,
+            'user'    => $user,
+            'unit'    => $unit,
             'content' => 'admin/user/index'
         ];
 
         return view('admin/layout/wrapper', $data);
     }
+    // tambah
     public function tambah()
     {
+        $unit_id = session()->get('unit_id');
+        $unit = Unit::where('id_unit', $unit_id)->first();
+        
         $units = Unit::select('id_unit', 'nama')->get(); // Mengambil semua unit dari database
 
         $data = [ 
             'title'   => 'Tambah Data User Administrator',
-            'units'   => $units, // Mengirim variabel $units ke view
+            'units'   => $units, 
+            'unit'    => $unit,
             'content' => 'admin/user/tambah'
         ];
 
@@ -122,10 +126,10 @@ class User extends Controller
          return redirect('user')->with(['sukses' => 'Data Telah Diedit']);
     }
      //  delete
-     public function delete($id_user)
+     public function delete($id)
     {
          $m_user = new User_model();
-         $data = ['id_user' => $id_user];
+         $data = ['id_user' => $id];
          $m_user->hapus($data);   
           
          return redirect('user')->with(['sukses' => 'Data Telah Dihapus']);

@@ -29,10 +29,15 @@ class Berita extends Controller
         // Ambil data berita dengan pagination
         $berita = $query->paginate(10); 
 
+        // Ambil unit berdasarkan session
+        $unit_id = session()->get('unit_id');
+        $unit = Unit::where('id_unit', $unit_id)->first();
+
         // Data yang dikirim ke view
         $data = [ 
             'title'   => 'Data Berita',
             'berita'  => $berita,
+            'unit'    => $unit,
             'content' => 'admin/berita/index'
         ];
 
@@ -137,11 +142,12 @@ class Berita extends Controller
          return redirect('berita')->with(['sukses' => 'Data Telah Diedit']);
     }
     //  delete
-    public function delete($id_berita)
-    {
-        $m_user       = new Berita_model();
-        $data         = ['id_berita'  => $id_berita];
-        $m_user->hapus($data);
-        return redirect('admin/berita')->with(['sukses' => 'Data Telah Dihapus']);
-    }
+   public function delete($id)
+   {
+        $m_berita = new Berita_model();
+        $data = ['id_berita' => $id];
+        $m_berita->hapus($data);   
+         
+        return redirect('berita')->with(['sukses' => 'Data Telah Dihapus']);
+   }
 }

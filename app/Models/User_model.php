@@ -41,6 +41,19 @@ class User_model extends Model
             ->first();
         return $query;
     }
+    
+    // login
+    public function login($username, $password)
+    {
+        $query = DB::table('Users')
+            ->select('*')
+            ->where('username', $username)
+            ->where('password', sha1($password))
+            ->orderBy('id_user','DESC')
+            ->first();
+        return $query;
+    }
+
     // edit 
     public function edit ($data)
     {
@@ -48,6 +61,7 @@ class User_model extends Model
             ->where('id_user',$data['id_user'])
             ->update($data);
     }
+    
     // hapus
     public function hapus ($data)
     {
