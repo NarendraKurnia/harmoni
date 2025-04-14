@@ -40,15 +40,22 @@
                 <div class="form-group row">
                     <label class="col-md-3 control-label text-right">Unit</label>
                     <div class="col-md-6">
-                        <select name="unit_id" class="form-control">
-                            <option value="">Pilih Unit</option>
+                        @if(session('unit_id') == 18)
+                            <select name="unit_id" class="form-control">
+                                <option value="">Pilih Unit</option>
+                                @foreach($units as $unit)
+                                    <option value="{{ $unit->id_unit }}" 
+                                        {{ old('unit_id', $berita->unit_id) == $unit->id_unit ? 'selected' : '' }}>
+                                        {{ $unit->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        @else
                             @foreach($units as $unit)
-                                <option value="{{ $unit->id_unit }}" 
-                                    {{ old('unit_id', $berita->unit_id) == $unit->id_unit ? 'selected' : '' }}>
-                                    {{ $unit->nama }}
-                                </option>
+                                <input type="hidden" name="unit_id" value="{{ $unit->id_unit }}">
+                                <input type="text" class="form-control" value="{{ $unit->nama }}" readonly>
                             @endforeach
-                        </select>
+                        @endif
                         <small class="text-secondary">Kategori</small>
                     </div>
                 </div>

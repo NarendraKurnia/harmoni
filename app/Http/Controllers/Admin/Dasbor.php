@@ -16,13 +16,14 @@ class Dasbor extends Controller
     {
         $rekapPerUnit = [];
         $bulanSekarang = Carbon::now();
-        $units = Unit::all();
+        $unit_id = session()->get('unit_id');
+        $unit = Unit::where('id_unit', $unit_id)->first();
+
+        // Jika admin (unit 18), ambil semua unit, kalau bukan, ambil unit yang sedang login saja
+        $units = ($unit_id == 18) ? Unit::all() : Unit::where('id_unit', $unit_id)->get();
+
         $chartLabels = [];
         $chartData = [];
-
-        // Ambil unit yang sedang login dari session
-        $unit_id = session()->get('unit_id');
-        $unit = Unit::where('id_unit', $unit_id)->first(); // atau pakai Unit_model kalau nama model kamu begitu
 
         foreach ($units as $unitLoop) {
             $dataPerBulan = [];
@@ -58,8 +59,8 @@ class Dasbor extends Controller
                 'total_point'   => $totalPointUnit
             ];
 
-            $chartData[] = $totalPointUnit;
             $chartLabels[] = $unitLoop->nama;
+            $chartData[] = $totalPointUnit;
         }
 
         $data = [
@@ -68,7 +69,7 @@ class Dasbor extends Controller
             'rekapPerUnit'  => $rekapPerUnit,
             'chartLabels'   => json_encode($chartLabels),
             'chartData'     => json_encode($chartData),
-            'unit'          => $unit // dikirim ke view
+            'unit'          => $unit
         ];
 
         return view('admin/layout/wrapper', $data);

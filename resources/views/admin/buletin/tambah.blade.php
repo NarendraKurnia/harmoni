@@ -47,12 +47,19 @@
 <div class="form-group row">
     <label class="col-md-3">Unit</label>
     <div class="col-md-6">
-        <select name="unit_id" class="form-control" required>
-            <option value="" disabled selected>Pilih Unit</option>
+        @if(session('unit_id') == 18)
+            <select name="unit_id" class="form-control" required>
+                <option value="" disabled selected>Pilih Unit</option>
+                @foreach ($units as $unit)
+                    <option value="{{ $unit->id_unit }}">{{ $unit->nama }}</option>
+                @endforeach
+            </select>
+        @else
             @foreach ($units as $unit)
-                <option value="{{ $unit->id_unit }}">{{ $unit->nama }}</option>
+                <input type="hidden" name="unit_id" value="{{ $unit->id_unit }}">
+                <input type="text" class="form-control" value="{{ $unit->nama }}" readonly>
             @endforeach
-        </select>
+        @endif
     </div>
 </div>
 
