@@ -36,13 +36,10 @@
 </a>
 
           <div class="dropdown-divider"></div>
-          <a href="{{ asset('admin/akun') }}" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> Update Profil
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="{{ asset('admin/akun/password') }}" class="dropdown-item">
+          <a href="{{ route('akun.edit') }}" class="dropdown-item">
             <i class="fas fa-file mr-2"></i> Ganti Password
           </a>
+
           <div class="dropdown-divider"></div>
           <a href="{{ asset('logout') }}" class="dropdown-item dropdown-footer text-danger"><i class="fa fa-sign-out-alt"></i>
           Logout</a>

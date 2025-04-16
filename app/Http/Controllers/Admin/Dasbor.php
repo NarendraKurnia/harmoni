@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Berita_model;
 use App\Models\Buletinadmin_model;
 use App\Models\Unit;
-use App\Models\Unit_model; // Tambahkan model ini jika berbeda dengan Unit
+use App\Models\Unit_model; 
 use Carbon\Carbon;
 
 class Dasbor extends Controller
@@ -19,8 +19,9 @@ class Dasbor extends Controller
         $unit_id = session()->get('unit_id');
         $unit = Unit::where('id_unit', $unit_id)->first();
 
-        // Jika admin (unit 18), ambil semua unit, kalau bukan, ambil unit yang sedang login saja
-        $units = ($unit_id == 18) ? Unit::all() : Unit::where('id_unit', $unit_id)->get();
+        $units = in_array($unit_id, [1, 18])
+        ? Unit::all(): 
+        Unit::where('id_unit', $unit_id)->get();
 
         $chartLabels = [];
         $chartData = [];

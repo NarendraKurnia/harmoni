@@ -12,7 +12,7 @@
         </ul>
     </div>
 @endif
-<form action="{{ asset('berita/proses-edit') }}" method="post" accept-charset="utf-8">
+<form action="{{ asset('berita/proses-edit') }}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
 {{ csrf_field() }}
 
 <input type="hidden" name="id_berita"	value="{{ $berita->id_berita }}">

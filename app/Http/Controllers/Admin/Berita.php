@@ -133,50 +133,60 @@ class Berita extends Controller
 
     return view('admin/layout/wrapper', $data);
     }
-    // proses_edit
     public function proses_edit(Request $request)
-
     {
-        $units = \App\Models\Unit::select('id_unit', 'nama')->get();
-         $m_berita     = new Berita_model();
-         request()->validate([
-                             'judul'      => 'required',
-                             'isi'        => 'required',
-                             'unit_id' => 'required|exists:units,id_unit',
-                             'gambar'     => 'nullable|file|image|mimes:jpeg,png,jpg|max:8024',
-                            ]);
-        // filter unit
-        $unit_id = session('unit_id');
-        if ($unit_id != 18) {
+    $m_berita = new Berita_model();
+
+    // 1. Validasi
+    $request->validate([
+        'judul'    => 'required',
+        'isi'      => 'required',
+        'unit_id'  => 'required|exists:units,id_unit',
+        'gambar'   => 'nullable|file|image|mimes:jpeg,png,jpg|max:8024',
+    ]);
+
+    // 2. Paksa unit_id dari session jika bukan admin
+    $unit_id = session('unit_id');
+    if ($unit_id != 18) {
         $request->merge(['unit_id' => $unit_id]);
-        }
-         // proses data input
-         $image                  = $request->file('gambar');
-         if(!empty($image)) {
-            $filenamewithextension  = $request->file('gambar')->getClientOriginalName();
-            $filename               = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            $input['nama_file']     = Str::slug($filename, '-').'-'.time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = 'admin/upload/berita/';
-            $image->move($destinationPath, $input['nama_file']);
-            $data   = [  'id_berita'     => $request->id_berita,
-                         'judul'         => $request->judul,
-                         'isi'	         => $request->isi,
-                         'gambar'   	 => $input['nama_file'],
-                         'unit_id' => $request->unit_id,
-                     ];
+    }
 
-        }else{   
-            // tidak ganti gambar
-            $data   = [  'id_berita'     => $request->id_berita,
-                         'judul'         => $request->judul,
-                         'isi'	         => $request->isi,
-                         'unit_id' => $request->unit_id,
-                     ];
+    $id_berita = $request->id_berita;
+    $image     = $request->file('gambar');
 
+    // 3. Siapkan data dasar untuk update
+    $data = [
+        'id_berita' => $id_berita,
+        'judul'     => $request->judul,
+        'isi'       => $request->isi,
+        'unit_id'   => $request->unit_id,
+    ];
+
+    // 4. Jika ada gambar baru diupload
+    if ($image) {
+        // a) Hapus file lama jika ada
+        $old = $m_berita->detail($id_berita);
+        if (!empty($old->gambar)) {
+            $oldPath = public_path('admin/upload/berita/' . $old->gambar);
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
         }
-         $m_berita->edit($data);
-         // end proses
-         return redirect('berita')->with(['sukses' => 'Data Telah Diedit']);
+
+        // b) Simpan file baru
+        $origName    = $image->getClientOriginalName();
+        $filename    = pathinfo($origName, PATHINFO_FILENAME);
+        $nama_file   = Str::slug($filename, '-') . '-' . time() . '.' . $image->getClientOriginalExtension();
+        $destPath    = public_path('admin/upload/berita/');
+        $image->move($destPath, $nama_file);
+
+        $data['gambar'] = $nama_file;
+    }
+
+    // 5. Update data
+    $m_berita->edit($data);
+
+    return redirect('berita')->with(['sukses' => 'Data Telah Diedit']);
     }
     //  delete
    public function delete($id)

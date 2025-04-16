@@ -3,64 +3,116 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Session;
-
 use App\Models\User_model;
-
 use App\Http\Controllers\Controller;
 
 class Login extends Controller
 {
-    //Login
+    /**
+     * Tampilkan form login
+     */
     public function index()
     {
-        $data = [ 'title'      => 'Login Administrator',
-                  'content'    => 'admin/login/index'
-                ];
-        return view('admin/login/layout',$data);
+        $data = [
+            'title'   => 'Login Administrator',
+            'content' => 'admin/login/index'
+        ];
+        return view('admin/login/layout', $data);
     }
 
-    // cek login
+    /**
+     * Proses cek login
+     */
     public function cek_login(Request $request)
     {
-        $m_user     = new User_model();
-        $username   = $request->username;
-        $password   = $request->password;
-        // panggil data user untuk data login
-        $user       = $m_user->login($username,$password);
-        // cek login
-        if($user) {
-            $request->session()->put('id_user', $user->id_user);
-            $request->session()->put('username', $user->id_user);
-            $request->session()->put('nama', $user->nama);
-            $request->session()->put('unit_id', $user->unit_id);
-            // jika login berhasil
+        $m_user   = new User_model();
+        $username = $request->username;
+        $password = $request->password;
+
+        // Panggil method login di model
+        $user = $m_user->login($username, $password);
+
+        if ($user) {
+            // Simpan session
+            $request->session()->put('id_user',   $user->id_user);
+            $request->session()->put('username',  $user->username);
+            $request->session()->put('nama',      $user->nama);
+            $request->session()->put('unit_id',   $user->unit_id);
+
             return redirect('dasbor')->with(['sukses' => 'Anda Berhasil Login']);
-        }else{
-            // jika login gagal
+        } else {
             return redirect('login')->with(['warning' => 'Username atau Password salah']);
         }
     }
 
-    //lupa_password
+    /**
+     * Tampilkan form lupa password
+     */
     public function lupa_password()
     {
-        $data = [ 'title'      => 'Reset Password',
-                  'content'    => 'admin/login/lupa_password'
-                ];
-        return view('admin/login/layout',$data);
+        $data = [
+            'title'   => 'Reset Password',
+            'content' => 'admin/login/lupa_password'
+        ];
+        return view('admin/login/layout', $data);
     }
-    // logout
+
+    /**
+     * Logout user
+     */
     public function logout()
     {
-        // hapus session
-        Session()->forget('id_user');
-        Session()->forget('username');
-        Session()->forget('nama');
-        Session()->forget('unit_id');
-        // redirect jika berhasil
+        Session::forget(['id_user', 'username', 'nama', 'unit_id']);
         return redirect('login')->with(['sukses' => 'Anda Berhasil logout']);
     }
-    
+
+    /**
+     * Tampilkan form ganti password (profil)
+     */
+    public function edit()
+{
+    $id_user = session('id_user');
+    $m_user  = new User_model();
+    $user    = $m_user->detail($id_user);
+
+    // kirim content ke login layout
+    return view('admin/login/layout', [
+      'title'   => 'Ganti Password',
+      'user'    => $user,
+    ]);
+}
+
+
+
+    /**
+     * Proses ganti password
+     */
+    public function proses_edit(Request $request)
+    {
+        $request->validate([
+            'old_password'              => 'required',
+            'new_password'              => 'required|min:6|confirmed',
+            'new_password_confirmation' => 'required'
+        ]);
+
+        $id_user = session('id_user');
+        $m_user  = new User_model();
+        $user    = $m_user->detail($id_user);
+
+        // Cek password lama (karena di model pakai sha1)
+        if (sha1($request->old_password) !== $user->password) {
+            return redirect()->route('akun.edit')
+                             ->with(['warning' => 'Password lama tidak cocok.']);
+        }
+
+        // Update password
+        $m_user->edit([
+            'id_user'  => $id_user,
+            'password' => sha1($request->new_password),
+        ]);
+
+        return redirect()->route('akun.edit')
+                         ->with(['sukses' => 'Password berhasil diubah.']);
+    }
 }

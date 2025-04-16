@@ -4,15 +4,26 @@ use App\Http\Controllers\Admin\Berita;
 use App\Http\Controllers\Admin\Buletin;
 use App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Umum\HomeController;
+use App\Http\Controllers\Umum\Tentangkami;
 use Illuminate\Support\Facades\Route;
 
+// Index
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+// Tentang Kami
+Route::get('tentangkami', [Tentangkami::class, 'index'])->name('tentangkami.index');
 
 //halaman login
 Route::get('login', 'App\Http\Controllers\Admin\Login@index');
 Route::get('lupa-password', 'App\Http\Controllers\Admin\Login@lupa_password');
 Route::post('cek-login', 'App\Http\Controllers\Admin\Login@cek_login');
 Route::get('logout', 'App\Http\Controllers\Admin\Login@logout');
+
+// Form Ganti Password
+Route::get('akun', 'App\Http\Controllers\Admin\Login@edit')->name('akun.edit');
+
+// Proses Ganti Password
+Route::post('akun', 'App\Http\Controllers\Admin\Login@proses_edit')->name('akun.proses_edit');
 
 // Dasbor
 Route::get('dasbor', 'App\Http\Controllers\Admin\Dasbor@index');
