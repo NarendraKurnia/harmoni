@@ -139,56 +139,56 @@ class Buletin extends Controller
        return view('admin/layout/wrapper',$data);
    }
    // proses_edit
-public function proses_edit(Request $request)
-{
-    $m_buletin = new Buletinadmin_model();
+    public function proses_edit(Request $request)
+    {
+        $m_buletin = new Buletinadmin_model();
 
-    // Validasi input
-    $request->validate([
-        'judul'         => 'required',
-        'edisi'         => 'required',
-        'isi'           => 'required',
-        'gambar'        => 'nullable|file|image|mimes:jpeg,png,jpg|max:8024',
-        'unit_id'       => 'required|exists:units,id_unit',
-        'link_buletin'  => 'required',
-    ]);
+        // Validasi input
+        $request->validate([
+            'judul'         => 'required',
+            'edisi'         => 'required',
+            'isi'           => 'required',
+            'gambar'        => 'nullable|file|image|mimes:jpeg,png,jpg|max:8024',
+            'unit_id'       => 'required|exists:units,id_unit',
+            'link_buletin'  => 'required',
+        ]);
 
-    $id_buletin = $request->id_buletin;
-    $image = $request->file('gambar');
+        $id_buletin = $request->id_buletin;
+        $image = $request->file('gambar');
 
-    $data = [
-        'id_buletin'    => $id_buletin,
-        'judul'         => $request->judul,
-        'edisi'         => $request->edisi,
-        'isi'           => $request->isi,
-        'unit_id'       => $request->unit_id,
-        'link_buletin'  => $request->link_buletin,
-    ];
+        $data = [
+            'id_buletin'    => $id_buletin,
+            'judul'         => $request->judul,
+            'edisi'         => $request->edisi,
+            'isi'           => $request->isi,
+            'unit_id'       => $request->unit_id,
+            'link_buletin'  => $request->link_buletin,
+        ];
 
-    // Jika ada gambar baru diupload
-    if ($image) {
-        $filenameWithExtension = $image->getClientOriginalName();
-        $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-        $nama_file = Str::slug($filename, '-') . '-' . time() . '.' . $image->getClientOriginalExtension();
+        // Jika ada gambar baru diupload
+        if ($image) {
+            $filenameWithExtension = $image->getClientOriginalName();
+            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $nama_file = Str::slug($filename, '-') . '-' . time() . '.' . $image->getClientOriginalExtension();
 
-        $destinationPath = 'admin/upload/buletin/';
-        $image->move(public_path($destinationPath), $nama_file);
-        $buletin = $m_buletin->detail($id_buletin);
+            $destinationPath = 'admin/upload/buletin/';
+            $image->move(public_path($destinationPath), $nama_file);
+            $buletin = $m_buletin->detail($id_buletin);
 
-        if ($image && $buletin->gambar) {
-            $oldPath = public_path('admin/upload/buletin/' . $buletin->gambar);
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($image && $buletin->gambar) {
+                $oldPath = public_path('admin/upload/buletin/' . $buletin->gambar);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
             }
+
+            $data['gambar'] = $nama_file;
         }
 
-        $data['gambar'] = $nama_file;
+        $m_buletin->edit($data);
+
+        return redirect('buletin')->with(['sukses' => 'Data Telah Diedit']);
     }
-
-    $m_buletin->edit($data);
-
-    return redirect('buletin')->with(['sukses' => 'Data Telah Diedit']);
-}
 
    //  delete
    public function delete($id)

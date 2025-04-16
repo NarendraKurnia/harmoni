@@ -47,6 +47,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ asset('youtube') }}" class="nav-link">
+              <i class="nav-icon fab fa-youtube"></i>
+              <p>
+                Youtube
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

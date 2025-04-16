@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Buletinadmin_model extends Model
+class Youtubeadmin_model extends Model
 {
-    use HasFactory;
-    protected $table = 'buletins';
-    protected $fillable = ['judul', 'isi', 'gambar', 'unit_id'];
+    //use HasFactory;
+    protected $table = 'youtube';
+    protected $fillable = ['judul', 'isi', 'link_youtube', 'unit_id'];
 
     public function unit()
     {
@@ -19,40 +19,40 @@ class Buletinadmin_model extends Model
     //listing
     public function listing()
     {
-        $query = DB::table('buletins')
+        $query = DB::table('youtube')
             ->select('*')
-            ->orderBy('id_buletin','DESC')
+            ->orderBy('id_youtube','DESC')
             ->get();
         return $query;
     }
     // tambah 
     public function tambah ($data)
     {
-        DB::table('buletins')
+        DB::table('youtube')
             ->insert($data);
     }
     // detail
-    public function detail($id_buletin)
+    public function detail($id_youtube)
     {
-        $query = DB::table('buletins')
+        $query = DB::table('youtube')
             ->select('*')
-            ->where('id_buletin', $id_buletin)
-            ->orderBy('id_buletin','DESC')
+            ->where('id_youtube', $id_youtube)
+            ->orderBy('id_youtube','DESC')
             ->first();
         return $query;
     }
     // edit
     public function edit($data)
     {
-    DB::table('buletins')
-        ->where('id_buletin', $data['id_buletin']) // <-- ERROR jika tidak ada 'id_buletin'
+    DB::table('youtube')
+        ->where('id_youtube', $data['id_youtube']) // <-- ERROR jika tidak ada 'id_buletin'
         ->update($data);
     }
     // hapus
     public function hapus ($data)
     {
-        DB::table('buletins')
-            ->where('id_buletin',$data['id_buletin'])
+        DB::table('youtube')
+            ->where('id_youtube',$data['id_youtube'])
             ->delete();
     }
 }

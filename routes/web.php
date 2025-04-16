@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Berita;
 use App\Http\Controllers\Admin\Buletin;
 use App\Http\Controllers\Admin\User;
+use App\Http\Controllers\Admin\Youtubeadmin;
 use App\Http\Controllers\Umum\HomeController;
 use App\Http\Controllers\Umum\Tentangkami;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,14 @@ Route::post('buletin/proses-tambah', 'App\Http\Controllers\Admin\Buletin@proses_
 Route::get('buletin/edit/{id}', 'App\Http\Controllers\Admin\Buletin@edit');
 Route::post('buletin/proses-edit', 'App\Http\Controllers\Admin\Buletin@proses_edit');
 Route::post('buletin/delete/{id}', [Buletin::class, 'delete'])->name('buletin.delete');
+
+// Youtube
+Route::get('youtube', 'App\Http\Controllers\Admin\Youtubeadmin@index');
+Route::get('youtube/tambah', 'App\Http\Controllers\Admin\Youtubeadmin@tambah');
+Route::post('youtube/proses-tambah', 'App\Http\Controllers\Admin\Youtubeadmin@proses_tambah');
+Route::get('youtube/edit/{id}', 'App\Http\Controllers\Admin\Youtubeadmin@edit');
+Route::post('youtube/proses-edit', 'App\Http\Controllers\Admin\Youtubeadmin@proses_edit');
+Route::post('youtube/delete/{id}', [Youtubeadmin::class, 'delete'])->name('youtube.delete');
 
 // Berita
 // Route::get('/berita', function () {
