@@ -6,10 +6,13 @@ use App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Admin\Youtubeadmin;
 use App\Http\Controllers\Umum\HomeController;
 use App\Http\Controllers\Umum\Tentangkami;
+use App\Http\Controllers\Umum\UIDController;
 use Illuminate\Support\Facades\Route;
 
 // Index
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+Route::get('/search', [HomeController::class, 'home'])->name('search');
 
 // Tentang Kami
 Route::get('tentangkami', [Tentangkami::class, 'index'])->name('tentangkami.index');
@@ -73,24 +76,7 @@ Route::post('youtube/delete/{id}', [Youtubeadmin::class, 'delete'])->name('youtu
 // })->name('buletin.index');
 
 // Tentang Kami
-Route::get('/tentangkami', function () {
-    return view('tentangkami.index');
-})->name('tentangkami.index');
+Route::get('/tentang-kami', [Tentangkami::class, 'index']);
 
-
-// Profil
-Route::get('/profil/uid', function () {
-    return view('profil.uid');
-})->name('profil.uid');
-
-Route::get('/profil/up3sbu', function () {
-    return view('profil.up3sbu');
-})->name('profil.up3sbu');
-
-Route::get('/profil/up3sbb', function () {
-    return view('profil.up3sbb');
-})->name('profil.up3sbb');
-
-Route::get('/profil/up3sbs', function () {
-    return view('profil.up3sbs');
-})->name('profil.up3sbs');
+// UID
+Route::get('/profil', [UIDController::class, 'uid'])->name('profil.uid');

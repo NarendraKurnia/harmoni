@@ -13,10 +13,10 @@
                             <p class="dropdown-header" style="text-align: center;">PROFIL</p>
                             <!-- Kolom 1 -->
                             <div class="col-md-3">
-                                <a class="dropdown-item" href="{{ route('profil.uid') }}">UID Jatim</a>
-                                <a class="dropdown-item" href="{{ route('profil.up3sbu') }}">UP3 Surabaya Utara</a>
-                                <a class="dropdown-item" href="{{ route('profil.up3sbs') }}">UP3 Surabaya Selatan</a>
-                                <a class="dropdown-item" href="{{ route('profil.up3sbb') }}">UP3 Surabaya Barat</a>
+                            <a class="dropdown-item" href="{{ route('profil.uid') }}">UID Jatim</a>
+                                <a class="dropdown-item" href="{{ route('profil.uid') }}">UP3 Surabaya Utara</a>
+                                <a class="dropdown-item" href="{{ route('profil.uid') }}">UP3 Surabaya Selatan</a>
+                                <a class="dropdown-item" href="{{ route('profil.uid') }}">UP3 Surabaya Barat</a>
                             </div>
                             <!-- Kolom 2 -->
                             <div class="col-md-3">
@@ -46,18 +46,18 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <form class="navbar-left" role="search" method="get" action="http://web.pln.co.id//search">
-                        <div class="container row">
-                            <div class="form-group col-md-10 colsm-10 col-xs-10">
-                                <input type="text" name="q" class="form-control" placeholder="Cari...">
-                            </div>
-                            <div class="col-md-2 col-sm-2 col-xs-2" style="margin-left: -15px;">
-                                <button type="submit" class="btn btn-default">
-                                <i class="bi bi-search"></i>
-                                </button>
-                            </div>
+                <form class="navbar-left" role="search" method="get" action="{{ route('search') }}">
+                    <div class="container row">
+                        <div class="form-group col-md-10 col-sm-10 col-xs-10">
+                            <input type="text" name="keywords" class="form-control" placeholder="Cari...">
                         </div>
-                    </form>
+                        <div class="col-md-2 col-sm-2 col-xs-2" style="margin-left: -15px;">
+                            <button type="submit" class="btn btn-default">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
                 </li>
             </ul>
         </div>

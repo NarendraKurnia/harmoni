@@ -54,10 +54,9 @@
     </div>
 </div>
 </div>
-
 <!-- Buletin -->
-<div class="container-fluid terusberkembang mt-4" id="Buletin">
-    <h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;">Buletin</h1>
+<div class="container-fluid terusberkembang">
+    <h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;">Buletin Terkini</h1>
     <hr style="border: none; height: 5px; background-color: #fbfb18; width: 20%; margin: auto; box-shadow: 0px 2px 5px rgba(0,0,0,0.2);">
     <!-- Bootstrap Carousel -->
     <div id="newsCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
@@ -68,155 +67,28 @@
         </div>
         <!-- isi konten slide 1 -->
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="container mt-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
+    <div class="carousel-item active">
+        <div class="container mt-4">
+            <div class="row">
+                @foreach($buletins as $buletin)
+                <div class="col-md-4 mb-4">
+                    <div class="news-cardterusbekembang">
+                        <img src="{{ asset('admin/upload/buletin/' . $buletin->gambar) }}" alt="{{ $buletin->judul }}">
+                        <div class="news-textterusbekembang">
+                            <h3>{{ $buletin->judul }}</h3>
+                            <h5>{{ $buletin->unit->nama }}</h5>
+                            <h5 class="text-justify">{{ Str::limit(strip_tags($buletin->isi), 30) }}</h5>
+                            <a class="nav-link-active lihat-detailbuletin" href="{{ route('home') }}">
+                                Lihat Detail <i class="bi bi-arrow-right-short"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
-            <!-- slide 2 -->
-            <div class="carousel-item">
-                <div class="container mt-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="news-cardterusbekembang">
-                                <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Berita PLN" >
-                                <div class="news-textterusbekembang">
-                                    <h3>Tingkatkan Keandalan Listrik Sulut dan Gorontalo, PLN Operasikan SUTT Sepanjang 80,59 Kms</h3>
-                                    <a class="nav-link-active lihat-detailbuletin" aria-current="page" href="{{ route('buletin.index') }}" title="">
-				                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-				                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
+</div>
             <!-- navigasi carousel -->
             <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -227,138 +99,38 @@
         </div>
     </div>
 </div>
-<!-- Berita -->
-<h1 class="layanan-online" id="Berita"style="text-align: center; color: #0d667a; margin-top: 10px;">Berita</h1>
+<!-- Berita Terkini -->
+<h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;">Berita Terkini</h1>
 <hr style="border: none; height: 5px; background-color: #fbfb18; width: 20%; margin: auto; box-shadow: 0px 2px 5px rgba(0,0,0,0.2);">
 
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators carousel-indicators-2">
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color: #0d667a;"></button>
+    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2" style="background-color: #0d667a;"></button>
   </div>
   
   <div class="carousel-inner">
     <!-- Slide 1 -->
     <div class="carousel-item active">
-      <div class="container mt-4">
-        <div class="row">
-          <div class="col-md-6">
+    <div class="container mt-4">
+    <div class="row">
+        @foreach($berita as $item)
+        <div class="col-md-6 mb-4">
             <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-				<a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
+                <img src="{{ asset('admin/upload/berita/' . $item->gambar) }}" alt="{{ $item->judul }}" class="img-fluid terkiniu-img">
+                <div class="news-terkiniu">
+                    <span class="text-primary">{{ \Carbon\Carbon::parse($item->tanggal_update)->translatedFormat('d F Y') }}</span>
+                    <a href="{{ route('home') }}" class="berita-title" style="font-weight: bold;">
+                        {{ $item->judul }}
+                    </a>
+                    <p>{{ $item->unit->nama }}</p>
+                    <p class="terkiniu-text">{{ Str::limit(strip_tags($item->isi), 150) }}</p>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-				<a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-				<a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-				<a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-				<a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-				<a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
-            </div>
-          </div>
-         </div>
-      </div>
-    </div>
-    <!-- Slide 2 -->
-    <div class="carousel-item">
-      <div class="container mt-4">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card-terkiniu">
-              <img src="{{ asset('umum/images/icon-terusberkembang.jpg') }}" alt="Co-Firing Biomassa" class="img-fluid terkiniu-img">
-              <div class="news-terkiniu">
-                <span class="text-primary">Siaran Pers || 01 Feb 2025</span>
-                <a href="{{ route('berita.index') }}" target="_blank" class="berita-title">
-				    Co-Firing Biomassa di PLTU PLN Hasilkan 1,67 Juta MWh Listrik Hijau Sepanjang 2024
-				</a>
-                <p class="terkiniu-text">Press Release No. 024.PR/STH.01.05/II/2025 Jakarta, 01 Februari 2025 – PT PLN (Persero) sukses mengimplementasikan teknologi substitusi batubara atau co-firing biomassa pada 47 Pembangkit Listrik Tenaga...</p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+        @endforeach
+    </div>
+</div>
     </div>
   </div>
 
@@ -372,65 +144,39 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
 <!-- Video -->
-<section class="home content-section" id="Video">
-    <div class="container mt-5 d-flex flex-column gap-4">
+<div class="container-fluid terusberkembang" style="margin-bottom: -50px;">
+    <h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;">Video</h1>
+    <hr style="border: none; height: 5px; background-color: #fbfb18; width: 20%; margin: auto; box-shadow: 0px 2px 5px rgba(0,0,0,0.2);">
+@foreach ($youtube as $video)
+<section class="home content-section mt-5" id="Penyambungan">
+    <div class="container mt-3 d-flex mb-5">
         <div class="row col-md-12 menu-penyambungan">
-            <!-- Judul -->
-            <h1 class="layanan-online text-center" id="Berita" style="color: #0d667a; margin-bottom: 30px;">Video</h1>
-
-            <!-- Video 1 -->
-            <div class="row align-items-center mb-4">
-                <div class="col-md-6">
-                    <h5>Layanan permohonan penyambungan baru listrik secara online yang cepat, mudah, nyaman, dan aman serta dapat dimonitor prosesnya</h5>
-                </div>
-                <div class="col-md-6">
-                    <video width="100%" controls class="mt-4">
-                        <source src="video.mp4" type="video/mp4">
-                        Browser Anda tidak mendukung tag video.
-                    </video>
-                </div>
-            </div>
-
-            <!-- Video 2 -->
-            <div class="row align-items-center mb-4">
-                <div class="col-md-6">
-                    <h5>Layanan permohonan penyambungan baru listrik secara online yang cepat, mudah, nyaman, dan aman serta dapat dimonitor prosesnya</h5>
-                </div>
-                <div class="col-md-6">
-                    <video width="100%" controls class="mt-4">
-                        <source src="video.mp4" type="video/mp4">
-                        Browser Anda tidak mendukung tag video.
-                    </video>
-                </div>
-            </div>
-
-            <!-- Video 3 -->
-            <div class="row align-items-center mb-4">
-                <div class="col-md-6">
-                    <h5>Layanan permohonan penyambungan baru listrik secara online yang cepat, mudah, nyaman, dan aman serta dapat dimonitor prosesnya</h5>
-                </div>
-                <div class="col-md-6">
-                    <video width="100%" controls class="mt-4">
-                        <source src="video.mp4" type="video/mp4">
-                        Browser Anda tidak mendukung tag video.
-                    </video>
-                </div>
-            </div>
-
-            <!-- Video 4 -->
-            <div class="row align-items-center mb-4">
-                <div class="col-md-6">
-                    <h5>Layanan permohonan penyambungan baru listrik secara online yang cepat, mudah, nyaman, dan aman serta dapat dimonitor prosesnya</h5>
-                </div>
-                <div class="col-md-6">
-                    <video width="100%" controls class="mt-4">
-                        <source src="video.mp4" type="video/mp4">
-                        Browser Anda tidak mendukung tag video.
-                    </video>
+        <div class="row col-md-6">
+            <h2 style="margin-bottom: 0;">{{ $video->judul }}</h2>
+            <h4 style="margin: 0;">{{ $video->unit->nama }}</h4>
+            <h5 style="margin-top: 0;">{!! $video->isi !!}</h5>
+        </div>
+            <div class="row col-md-6 d-flex" style="margin-left: 30px;">
+                <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 100%;">
+                    <iframe 
+                        src="{{ $video->link_youtube }}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen 
+                        style="position: absolute; top:0; left: 0; width: 100%; height: 100%;">
+                    </iframe>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endforeach
+</div>
+
+
+{{-- Tambahkan pagination kalau mau --}}
+{{ $youtube->links() }}
+
 @include('layout.footer')

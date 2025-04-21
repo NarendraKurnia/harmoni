@@ -49,8 +49,8 @@
 			<div class="col-md-4">
 			    <div class="news-cardterusbekembang text-center">
 				    <img src="{{ asset('umum/images/companyprofile.png') }}" alt="Company Profile" class="img-fluid custom-img">
-				    <div class="d-flex justify-content-center mt-2" style="text-decoration: none;">
-				        <button class="btn-link custom-button">Unduh Company Profile</button>
+				    <div class="d-flex justify-content-center mt-2">
+				        <button class="btn-link custom-button text-decoration-none">Unduh Company Profile</button>
 				    </div>
 				</div>
 			</div>

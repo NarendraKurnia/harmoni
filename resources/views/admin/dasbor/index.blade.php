@@ -26,7 +26,7 @@
               <ul class="pl-3 mb-2 ml-2">
                 <li>Buletin: {{ $bulan['buletin'] }}</li>
                 <li>Berita: {{ $bulan['berita'] }}</li>
-                <li>Youtube: -</li>
+                <li>Youtube: {{ $bulan['youtube'] }}</li>
               </ul>
             </div>
           </div>

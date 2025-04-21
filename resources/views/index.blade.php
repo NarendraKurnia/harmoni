@@ -71,33 +71,29 @@
 </div>
 
 <!-- PENYAMBUNGAN -->
-<section class="home content-section" id="Penyambungan">
+@foreach ($youtube as $video)
+<section class="home content-section mt-5" id="Penyambungan">
     <div class="container mt-3 d-flex mb-5">
         <div class="row col-md-12 menu-penyambungan">
-            <div class="row col-md-6 mt-3">
-                <h3>Video Profile</h3>
-                <h5 class="mt-3">Video Profile antar unit pelaksana wilayah UID Jawa Timur</h5>
-                <div class="menu-penyambungan-detail" style="margin-top: 50px;">
-                    <a class="nav-link-active" aria-current="page" href="#" title="">
-                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-                    </a>
+        <div class="row col-md-6">
+            <h2 style="margin-bottom: 0;">{{ $video->judul }}</h2>
+            <h5 style="margin-top: 0;">{!! $video->isi !!}</h5>
+        </div>
+            <div class="row col-md-6 d-flex" style="margin-left: 30px;">
+                <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 100%;">
+                    <iframe 
+                        src="{{ $video->link_youtube }}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen 
+                        style="position: absolute; top:0; left: 0; width: 100%; height: 100%;">
+                    </iframe>
                 </div>
             </div>
-            <div class="row col-md-6 d-flex" style="margin-left: 30px;">
-    <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 100%;">
-        <iframe 
-            src="https://www.youtube.com/embed/hqh-C8SlH0Q?si=B9FMXful2gy3Ngcr" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen 
-            style="position: absolute; top:0; left: 0; width: 100%; height: 100%;">
-        </iframe>
-    </div>
-</div>
-
         </div>
     </div>
 </section>
+@endforeach
 
 <!-- Perubahan Daya -->
 <section class="home content-section" id="Perubahandaya" style="display: none;">

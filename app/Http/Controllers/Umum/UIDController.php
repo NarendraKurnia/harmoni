@@ -3,24 +3,23 @@
 namespace App\Http\Controllers\Umum;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use App\Models\Buletinadmin_model;
 use App\Models\Youtubeadmin_model;
+use Illuminate\Http\Request;
+use App\Models\Buletinadmin_model;
 use App\Models\Berita_model;
-use App\Models\Unit;
 
-class HomeController extends Controller
+class UIDController extends Controller
 {
-    //
-    public function home(Request $request)
+    public function uid(Request $request) 
     {
-        // Pencarian
         $keywords = $request->keywords;
+
+        // ID unit UID Jawa Timur
+        $unit_id = 1;
 
         // Berita
         $berita = Berita_model::with('unit')
+            ->where('unit_id', $unit_id)
             ->when($keywords, function ($query, $keywords) {
                 $query->where(function($q) use ($keywords) {
                     $q->where('judul', 'like', "%{$keywords}%")
@@ -32,6 +31,7 @@ class HomeController extends Controller
 
         // Buletin
         $buletin = Buletinadmin_model::with('unit')
+            ->where('unit_id', $unit_id)
             ->when($keywords, function ($query, $keywords) {
                 $query->where(function($q) use ($keywords) {
                     $q->where('judul', 'like', "%{$keywords}%")
@@ -43,6 +43,7 @@ class HomeController extends Controller
 
         // Youtube
         $youtube = Youtubeadmin_model::with('unit')
+            ->where('unit_id', $unit_id)
             ->when($keywords, function ($query, $keywords) {
                 $query->where(function($q) use ($keywords) {
                     $q->where('judul', 'like', "%{$keywords}%")
@@ -51,13 +52,12 @@ class HomeController extends Controller
             })
             ->orderBy('id_youtube', 'DESC')
             ->paginate(5, ['*'], 'youtube_page');
-        
-        // Data ke view
-        return view('index', [
-            'title'     => 'Informasi Publik',
-            'berita'    => $berita,
-            'buletins'  => $buletin,
-            'youtube'   => $youtube,
+
+        return view('profil.uid', [
+            'title' => 'UID Jawa Timur',
+            'berita' => $berita,
+            'buletins' => $buletin,
+            'youtube' => $youtube,
         ]);
     }
 }
