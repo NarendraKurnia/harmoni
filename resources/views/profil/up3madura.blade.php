@@ -146,7 +146,7 @@
 </div>
 
 <!-- Video -->
-<div class="container-fluid terusberkembang" style="margin-bottom: -50px;">
+<div class="container-fluid terusberkembang mt-5" style="margin-bottom: -50px;">
     <h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;">Video</h1>
     <hr style="border: none; height: 5px; background-color: #fbfb18; width: 20%; margin: auto; box-shadow: 0px 2px 5px rgba(0,0,0,0.2);">
 @foreach ($youtube as $video)
@@ -175,8 +175,6 @@
 @endforeach
 </div>
 
-
-{{-- Tambahkan pagination kalau mau --}}
 {{ $youtube->links() }}
 
 @include('layout.footer')

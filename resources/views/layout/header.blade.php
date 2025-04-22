@@ -14,16 +14,16 @@
                             <!-- Kolom 1 -->
                             <div class="col-md-3">
                             <a class="dropdown-item" href="{{ route('profil.uid') }}">UID Jatim</a>
-                                <a class="dropdown-item" href="{{ route('profil.uid') }}">UP3 Surabaya Utara</a>
-                                <a class="dropdown-item" href="{{ route('profil.uid') }}">UP3 Surabaya Selatan</a>
-                                <a class="dropdown-item" href="{{ route('profil.uid') }}">UP3 Surabaya Barat</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3sbu') }}">UP3 Surabaya Utara</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3sbs') }}">UP3 Surabaya Selatan</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3sbb') }}">UP3 Surabaya Barat</a>
                             </div>
                             <!-- Kolom 2 -->
                             <div class="col-md-3">
-                                <a class="dropdown-item" href="#">UP3 Mojokerto</a>
-                                <a class="dropdown-item" href="#">UP3 Gresik</a>
-                                <a class="dropdown-item" href="#">UP3 Madura</a>
-                                <a class="dropdown-item" href="#">UP3 Banyuwangi</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3mojokerto') }}">UP3 Mojokerto</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3gresik') }}">UP3 Gresik</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3madura') }}">UP3 Madura</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3banyuwangi') }}">UP3 Banyuwangi</a>
                             </div>
                             <!-- Kolom 3 -->
                             <div class="col-md-3">

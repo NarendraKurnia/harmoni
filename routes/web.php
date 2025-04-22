@@ -7,6 +7,13 @@ use App\Http\Controllers\Admin\Youtubeadmin;
 use App\Http\Controllers\Umum\HomeController;
 use App\Http\Controllers\Umum\Tentangkami;
 use App\Http\Controllers\Umum\UIDController;
+use App\Http\Controllers\Umum\Up3banyuwangiController;
+use App\Http\Controllers\Umum\Up3gresikController;
+use App\Http\Controllers\Umum\Up3maduraController;
+use App\Http\Controllers\Umum\Up3mojokertoController;
+use App\Http\Controllers\Umum\Up3sbsController;
+use App\Http\Controllers\Umum\Up3sbuController;
+use App\Http\Controllers\Umum\Up3sbbController;
 use Illuminate\Support\Facades\Route;
 
 // Index
@@ -78,5 +85,15 @@ Route::post('youtube/delete/{id}', [Youtubeadmin::class, 'delete'])->name('youtu
 // Tentang Kami
 Route::get('/tentang-kami', [Tentangkami::class, 'index']);
 
-// UID
-Route::get('/profil', [UIDController::class, 'uid'])->name('profil.uid');
+// Unit
+Route::prefix('profil')->group(function () {
+    Route::get('/uid', [UIDController::class, 'uid'])->name('profil.uid');
+    Route::get('/up3sbu', [Up3sbuController::class, 'sbu'])->name('profil.up3sbu');
+    Route::get('/up3sbs', [Up3sbsController::class, 'sbs'])->name('profil.up3sbs');
+    Route::get('/up3sbb', [Up3sbbController::class, 'sbb'])->name('profil.up3sbb');
+    Route::get('/up3mojokerto', [Up3mojokertoController::class, 'mojokerto'])->name('profil.up3mojokerto');
+    Route::get('/up3gresik', [Up3gresikController::class, 'gresik'])->name('profil.up3gresik');
+    Route::get('/up3madura', [Up3maduraController::class, 'madura'])->name('profil.up3madura');
+    Route::get('/up3banyuwangi', [Up3banyuwangiController::class, 'banyuwangi'])->name('profil.up3banyuwangi');
+});
+
