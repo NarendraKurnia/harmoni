@@ -7,17 +7,29 @@ use App\Http\Controllers\Admin\Youtubeadmin;
 use App\Http\Controllers\Umum\HomeController;
 use App\Http\Controllers\Umum\Tentangkami;
 use App\Http\Controllers\Umum\UIDController;
+use App\Http\Controllers\Umum\Up2dController;
 use App\Http\Controllers\Umum\Up3banyuwangiController;
+use App\Http\Controllers\Umum\Up3bojonegoroController;
 use App\Http\Controllers\Umum\Up3gresikController;
+use App\Http\Controllers\Umum\Up3kediriController;
+use App\Http\Controllers\Umum\Up3madiunController;
 use App\Http\Controllers\Umum\Up3maduraController;
+use App\Http\Controllers\Umum\Up3malangController;
 use App\Http\Controllers\Umum\Up3mojokertoController;
+use App\Http\Controllers\Umum\Up3pasuruanController;
+use App\Http\Controllers\Umum\Up3ponorogoController;
 use App\Http\Controllers\Umum\Up3sbsController;
 use App\Http\Controllers\Umum\Up3sbuController;
 use App\Http\Controllers\Umum\Up3sbbController;
+use App\Http\Controllers\Umum\Up3sidoarjoController;
+use App\Http\Controllers\Umum\Up3situbondoController;
 use Illuminate\Support\Facades\Route;
 
 // Index
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/berita/{id}', [HomeController::class, 'detailBerita'])->name('berita.detail');
+Route::get('/buletin/{id}', [HomeController::class, 'detailBuletin'])->name('buletin.detail');
+
 
 Route::get('/search', [HomeController::class, 'home'])->name('search');
 
@@ -95,5 +107,14 @@ Route::prefix('profil')->group(function () {
     Route::get('/up3gresik', [Up3gresikController::class, 'gresik'])->name('profil.up3gresik');
     Route::get('/up3madura', [Up3maduraController::class, 'madura'])->name('profil.up3madura');
     Route::get('/up3banyuwangi', [Up3banyuwangiController::class, 'banyuwangi'])->name('profil.up3banyuwangi');
+    Route::get('/up2d', [Up2dController::class, 'up2d'])->name('profil.up2d');
+    Route::get('/up3malang', [Up3malangController::class, 'malang'])->name('profil.up3malang');
+    Route::get('/up3sidoarjo', [Up3sidoarjoController::class, 'sidoarjo'])->name('profil.up3sidoarjo');
+    Route::get('/up3madiun', [Up3madiunController::class, 'madiun'])->name('profil.up3madiun');
+    Route::get('/up3pasuruan', [Up3pasuruanController::class, 'pasuruan'])->name('profil.up3pasuruan');
+    Route::get('/up3bojonegoro', [Up3bojonegoroController::class, 'bojonegoro'])->name('profil.up3bojonegoro');
+    Route::get('/up3kediri', [Up3kediriController::class, 'kediri'])->name('profil.up3kediri');
+    Route::get('/up3ponorogo', [Up3ponorogoController::class, 'ponorogo'])->name('profil.up3ponorogo');
+    Route::get('/up3situbondo', [Up3situbondoController::class, 'situbondo'])->name('profil.up3situbondo');
 });
 

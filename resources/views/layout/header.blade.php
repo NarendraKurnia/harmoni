@@ -27,18 +27,18 @@
                             </div>
                             <!-- Kolom 3 -->
                             <div class="col-md-3">
-                                <a class="dropdown-item" href="#">UP2D</a>
-                                <a class="dropdown-item" href="#">UP3 Malang</a>
-                                <a class="dropdown-item" href="#">UP3 Sidoarjo</a>
-                                <a class="dropdown-item" href="#">UP3 Madiun</a>
+                                <a class="dropdown-item" href="{{ route('profil.up2d') }}">UP2D</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3malang') }}">UP3 Malang</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3sidoarjo') }}">UP3 Sidoarjo</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3madiun') }}">UP3 Madiun</a>
                             </div>
                             <!-- Kolom 4 -->
                             <div class="col-md-3">
-                                <a class="dropdown-item" href="#">UP3 Pasuruan</a>
-                                <a class="dropdown-item" href="#">UP3 Bojonegoro</a>
-                                <a class="dropdown-item" href="#">UP3 Kediri</a>
-                                <a class="dropdown-item" href="#">UP3 Ponorogo</a>
-                                <a class="dropdown-item" href="#">UP3 Situbondo</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3pasuruan') }}">UP3 Pasuruan</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3bojonegoro') }}">UP3 Bojonegoro</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3kediri') }}">UP3 Kediri</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3ponorogo') }}">UP3 Ponorogo</a>
+                                <a class="dropdown-item" href="{{ route('profil.up3situbondo') }}">UP3 Situbondo</a>
                             </div>
                         </div>
                     </div>

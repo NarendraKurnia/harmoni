@@ -60,4 +60,55 @@ class HomeController extends Controller
             'youtube'   => $youtube,
         ]);
     }
+
+    // detail berita
+
+    public function detailBerita($id)
+    {
+    // Ambil berita beserta relasi unit
+    $berita = Berita_model::with('unit')
+               ->where('id_berita', $id)
+               ->firstOrFail();
+
+    // Kunci untuk menyimpan status tampilan berita di session
+    $key = 'berita_viewed_' . $berita->id_berita;
+
+    // Tambah views jika belum pernah dilihat di session
+    if (!session()->has($key)) {
+        $berita->increment('views'); // Naikkan jumlah view
+        session()->put($key, true);  // Simpan di session supaya tidak nambah terus
+    }
+
+    // Kembalikan tampilan dengan data berita
+    return view('berita.detail', [
+        'berita' => $berita,
+        'title' => $berita->judul
+    ]);
+    }
+    
+    // buletin detail
+    public function detailBuletin($id)
+    {
+    // Ambil berita beserta relasi unit
+    $buletin = Buletinadmin_model::with('unit')
+               ->where('id_buletin', $id)
+               ->firstOrFail();
+
+    // Kunci untuk menyimpan status tampilan berita di session
+    $key = 'buletin_viewed_' . $buletin->id_buletin;
+
+    // Tambah views jika belum pernah dilihat di session
+    if (!session()->has($key)) {
+        $buletin->increment('views'); // Naikkan jumlah view
+        session()->put($key, true);  // Simpan di session supaya tidak nambah terus
+    }
+
+    // Kembalikan tampilan dengan data berita
+    return view('buletin.detail', [
+        'buletin' => $buletin,
+        'title' => $buletin->judul
+    ]);
+    }
+
+
 }

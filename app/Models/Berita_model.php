@@ -9,12 +9,17 @@ use Illuminate\Support\Facades\DB;
 class Berita_model extends Model
 {
     use HasFactory;
+
     protected $table = 'berita';
-    protected $fillable = ['judul', 'isi', 'gambar', 'unit_id'];
+    protected $fillable = ['judul', 'isi', 'gambar', 'unit_id', 'views', 'tanggal_update'];
+    protected $primaryKey = 'id_berita';
+
+    const UPDATED_AT = 'tanggal_update';
+    const CREATED_AT = null; 
 
     public function unit()
     {
-    return $this->belongsTo(Unit::class, 'unit_id', 'id_unit'); // Pastikan unit_id cocok dengan id_unit
+        return $this->belongsTo(Unit::class, 'unit_id', 'id_unit');
     }
     //listing
     public function listing()

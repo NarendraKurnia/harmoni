@@ -11,10 +11,12 @@ class Buletinadmin_model extends Model
     use HasFactory;
     protected $table = 'buletins';
     protected $fillable = ['judul', 'isi', 'gambar', 'unit_id'];
-
+    protected $primaryKey = 'id_buletin';
+    const UPDATED_AT = 'tanggal_update';
+    const CREATED_AT = null;
     public function unit()
     {
-    return $this->belongsTo(Unit::class, 'unit_id', 'id_unit'); 
+        return $this->belongsTo(Unit::class, 'unit_id', 'id_unit');
     }
     //listing
     public function listing()

@@ -120,7 +120,7 @@
                 <img src="{{ asset('admin/upload/berita/' . $item->gambar) }}" alt="{{ $item->judul }}" class="img-fluid terkiniu-img">
                 <div class="news-terkiniu">
                     <span class="text-primary">{{ \Carbon\Carbon::parse($item->tanggal_update)->translatedFormat('d F Y') }}</span>
-                    <a href="{{ route('berita.detail', $item->id_berita) }}" class="berita-title" style="font-weight: bold;">
+                    <a href="{{ route('home') }}" class="berita-title" style="font-weight: bold;">
                         {{ $item->judul }}
                     </a>
                     <p>{{ $item->unit->nama }}</p>
@@ -175,8 +175,6 @@
 @endforeach
 </div>
 
-
-{{-- Tambahkan pagination kalau mau --}}
 {{ $youtube->links() }}
 
 @include('layout.footer')
