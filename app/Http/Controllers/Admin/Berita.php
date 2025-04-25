@@ -133,6 +133,8 @@ class Berita extends Controller
 
     return view('admin/layout/wrapper', $data);
     }
+
+    // proses edit
     public function proses_edit(Request $request)
     {
     $m_berita = new Berita_model();
