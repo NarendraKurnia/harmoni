@@ -16,29 +16,54 @@ class Up3maduraController extends Controller
     
         $unit_id = 7;
     
-        // Berita
+        // Ambil data berita untuk daftar halaman (paginate)
         $berita = Berita_model::with('unit')
-            ->where('unit_id', $unit_id)
+            ->where('unit_id', $unit_id) // Tambahkan filter ini
             ->when($keywords, function ($query, $keywords) {
                 $query->where(function($q) use ($keywords) {
                     $q->where('judul', 'like', "%{$keywords}%")
-                      ->orWhere('isi', 'like', "%{$keywords}%");
+                    ->orWhere('isi', 'like', "%{$keywords}%");
                 });
             })
             ->orderBy('id_berita', 'DESC')
             ->paginate(5, ['*'], 'berita_page');
-    
+
+
+        // Ambil semua berita terbaru (tanpa paginate) untuk carousel slide 6 per slide
+        $allBerita = Berita_model::with('unit')
+            ->where('unit_id', $unit_id)
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                    ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_berita', 'DESC')
+            ->get();
+
         // Buletin
         $buletin = Buletinadmin_model::with('unit')
             ->where('unit_id', $unit_id)
             ->when($keywords, function ($query, $keywords) {
                 $query->where(function($q) use ($keywords) {
                     $q->where('judul', 'like', "%{$keywords}%")
-                      ->orWhere('isi', 'like', "%{$keywords}%");
+                    ->orWhere('isi', 'like', "%{$keywords}%");
                 });
             })
             ->orderBy('id_buletin', 'DESC')
             ->paginate(5, ['*'], 'buletin_page');
+        
+        // all buletin
+        $allBuletin = Buletinadmin_model::with('unit')
+            ->where('unit_id', $unit_id)
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                    ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_buletin', 'DESC')
+            ->get();
     
         // Youtube
         $youtube = Youtubeadmin_model::with('unit')
@@ -53,10 +78,12 @@ class Up3maduraController extends Controller
             ->paginate(5, ['*'], 'youtube_page');
     
         return view('profil.up3madura', [
-            'title' => 'UP3 Madura',
-            'berita' => $berita,
-            'buletins' => $buletin,
-            'youtube' => $youtube,
+            'title'         => 'UP3 Madura',
+            'berita'        => $berita,
+            'allBerita'     => $allBerita,
+            'buletins'      => $buletin,
+            'allBuletin'    => $allBuletin,
+            'youtube'       => $youtube,
         ]);
     }
 }

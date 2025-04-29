@@ -69,7 +69,7 @@ class HomeController extends Controller
             ->orderBy('id_buletin', 'DESC')
             ->get(); // get semua, nanti chunk di blade
         
-
+        // Youtube
             $youtube = Youtubeadmin_model::with('unit')
             ->whereHas('unit', function ($query) {
                 $query->where('nama', 'Admin'); // Sesuaikan ini dengan nama unit admin kamu
@@ -138,7 +138,11 @@ class HomeController extends Controller
             $buletin->increment('views');
             session()->put($key, true);
         }
-
+        $key = 'buletin_viewed_' . $buletin->id_buletin;
+        if (!session()->has($key)) {
+            $buletin->increment('views');
+            session()->put($key, true);
+        }
         return view('buletin.detail', [
             'buletin' => $buletin,
             'title'   => $buletin->judul

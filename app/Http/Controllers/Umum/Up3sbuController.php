@@ -18,47 +18,74 @@ public function sbu(Request $request)
     // ID unit UID Jawa Timur
     $unit_id = 2;
 
-    // Berita
-    $berita = Berita_model::with('unit')
-        ->where('unit_id', $unit_id)
-        ->when($keywords, function ($query, $keywords) {
-            $query->where(function($q) use ($keywords) {
-                $q->where('judul', 'like', "%{$keywords}%")
-                  ->orWhere('isi', 'like', "%{$keywords}%");
-            });
-        })
-        ->orderBy('id_berita', 'DESC')
-        ->paginate(5, ['*'], 'berita_page');
+    // Ambil data berita untuk daftar halaman (paginate)
+        $berita = Berita_model::with('unit')
+            ->where('unit_id', $unit_id) // Tambahkan filter ini
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                    ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_berita', 'DESC')
+            ->paginate(5, ['*'], 'berita_page');
 
-    // Buletin
-    $buletin = Buletinadmin_model::with('unit')
-        ->where('unit_id', $unit_id)
-        ->when($keywords, function ($query, $keywords) {
-            $query->where(function($q) use ($keywords) {
-                $q->where('judul', 'like', "%{$keywords}%")
-                  ->orWhere('isi', 'like', "%{$keywords}%");
-            });
-        })
-        ->orderBy('id_buletin', 'DESC')
-        ->paginate(5, ['*'], 'buletin_page');
 
-    // Youtube
-    $youtube = Youtubeadmin_model::with('unit')
-        ->where('unit_id', $unit_id)
-        ->when($keywords, function ($query, $keywords) {
-            $query->where(function($q) use ($keywords) {
-                $q->where('judul', 'like', "%{$keywords}%")
-                  ->orWhere('isi', 'like', "%{$keywords}%");
-            });
-        })
-        ->orderBy('id_youtube', 'DESC')
-        ->paginate(5, ['*'], 'youtube_page');
+        // Ambil semua berita terbaru (tanpa paginate) untuk carousel slide 6 per slide
+        $allBerita = Berita_model::with('unit')
+            ->where('unit_id', $unit_id)
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                    ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_berita', 'DESC')
+            ->get();
 
-    return view('profil.up3sbu', [
-        'title' => 'UP3 Surabaya Utara',
-        'berita' => $berita,
-        'buletins' => $buletin,
-        'youtube' => $youtube,
-    ]);
-}
+        // Buletin
+        $buletin = Buletinadmin_model::with('unit')
+            ->where('unit_id', $unit_id)
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                    ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_buletin', 'DESC')
+            ->paginate(5, ['*'], 'buletin_page');
+        
+        // all buletin
+        $allBuletin = Buletinadmin_model::with('unit')
+            ->where('unit_id', $unit_id)
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                    ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_buletin', 'DESC')
+            ->get();
+
+        // Youtube
+        $youtube = Youtubeadmin_model::with('unit')
+            ->where('unit_id', $unit_id)
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                    ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_youtube', 'DESC')
+            ->paginate(5, ['*'], 'youtube_page');
+
+        return view('profil.up3sbu', [
+            'title'         => 'UP3 Surabaya Utara',
+            'berita'        => $berita,
+            'allBerita'     => $allBerita,
+            'buletins'      => $buletin,
+            'allBuletin'    => $allBuletin,
+            'youtube'       => $youtube,
+        ]);
+    }
 }

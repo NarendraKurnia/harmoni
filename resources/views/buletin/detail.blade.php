@@ -4,6 +4,13 @@
     <h2 style=" margin-top: 10px;">{{ $buletin->judul }}</h2>
     <h4 style="font-size: 1em;">{{ $buletin->unit->nama }}</h4>
     <h5 style="font-size: 1em;">{{ $buletin->edisi }}</h5>
+    <div class="d-flex justify-content-between align-items-center" style="font-size: 1em;">
+                <h5 class="mb-0">{{ \Carbon\Carbon::parse($buletin->tanggal_update)->translatedFormat('d F Y') }}</h5>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-eye me-1"></i>
+                    <span>{{ $buletin->views }}</span>
+                </div>
+    </div>
     <hr>
     <div class="berita-up3sbb">
     <img src="{{ asset('admin/upload/buletin/' . $buletin->gambar) }}" alt="{{ $buletin->judul }}" class="profil-img" style="width: 400px; height: auto;">
