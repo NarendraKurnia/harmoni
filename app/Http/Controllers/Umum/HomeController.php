@@ -14,113 +14,134 @@ use App\Models\Unit;
 
 class HomeController extends Controller
 {
-    //
+    /**
+     * Tampilkan halaman utama, termasuk banner, carousel berita, buletin, dan video
+     */
     public function home(Request $request)
-{
-    // Pencarian
-    $keywords = $request->keywords;
+    {
+        // Pencarian global
+        $keywords = $request->keywords;
 
-    // Banner
-    $banner = (new Banner_model())->listing();
+        // Banner untuk carousel banner
+        $banner = (new Banner_model())->listing();
 
-    // Berita
-    $berita = Berita_model::with('unit')
-        ->when($keywords, function ($query, $keywords) {
-            $query->where(function($q) use ($keywords) {
-                $q->where('judul', 'like', "%{$keywords}%")
-                  ->orWhere('isi', 'like', "%{$keywords}%");
-            });
-        })
-        ->orderBy('id_berita', 'DESC')
-        ->paginate(5, ['*'], 'berita_page');
+        // Ambil data berita untuk daftar halaman (paginate)
+        $berita = Berita_model::with('unit')
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                      ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_berita', 'DESC')
+            ->paginate(5, ['*'], 'berita_page');
 
-    // Buletin
-    $buletin = Buletinadmin_model::with('unit')
-        ->when($keywords, function ($query, $keywords) {
-            $query->where(function($q) use ($keywords) {
-                $q->where('judul', 'like', "%{$keywords}%")
-                  ->orWhere('isi', 'like', "%{$keywords}%");
-            });
-        })
-        ->orderBy('id_buletin', 'DESC')
-        ->paginate(5, ['*'], 'buletin_page');
+        // Ambil semua berita terbaru (tanpa paginate) untuk carousel slide 6 per slide
+        $allBerita = Berita_model::with('unit')
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                      ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_berita', 'DESC')
+            ->get();
 
-    // Youtube
-    $youtube = Youtubeadmin_model::with('unit')
-        ->when($keywords, function ($query, $keywords) {
-            $query->where(function($q) use ($keywords) {
-                $q->where('judul', 'like', "%{$keywords}%")
-                  ->orWhere('isi', 'like', "%{$keywords}%");
-            });
-        })
-        ->orderBy('id_youtube', 'DESC')
-        ->paginate(5, ['*'], 'youtube_page');
+        // Buletin
+        $buletin = Buletinadmin_model::with('unit')
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                      ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_buletin', 'DESC')
+            ->paginate(5, ['*'], 'buletin_page');
+        
+        // all buletin
+        $allBuletin = Buletinadmin_model::with('unit')
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                      ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_buletin', 'DESC')
+            ->get(); // get semua, nanti chunk di blade
+        
 
-    // Data ke view
-    return view('index', [
-        'title'     => 'Informasi Publik',
-        'banner'    => $banner,
-        'berita'    => $berita,
-        'buletins'  => $buletin,
-        'youtube'   => $youtube,
-    ]);
-}
+            $youtube = Youtubeadmin_model::with('unit')
+            ->whereHas('unit', function ($query) {
+                $query->where('nama', 'Admin'); // Sesuaikan ini dengan nama unit admin kamu
+            })
+            ->when($keywords, function ($query, $keywords) {
+                $query->where(function($q) use ($keywords) {
+                    $q->where('judul', 'like', "%{$keywords}%")
+                      ->orWhere('isi', 'like', "%{$keywords}%");
+                });
+            })
+            ->orderBy('id_youtube', 'DESC')
+            ->paginate(5, ['*'], 'youtube_page');
+        
 
-    // detail berita
+        // Kirim semua data ke view
+        return view('index', [
+            'title'         => 'Informasi Publik',
+            'banner'        => $banner,
+            'berita'        => $berita,
+            'allBerita'     => $allBerita,
+            'buletins'      => $buletin,
+            'allBuletin'    => $allBuletin,
+            'youtube'       => $youtube,
+        ]);
+    }
+
+    /**
+     * Tampilkan halaman detail berita
+     */
     public function detailBerita($id)
     {
-        // Ambil berita utama beserta relasi unit
         $berita = Berita_model::with('unit')
                    ->where('id_berita', $id)
                    ->firstOrFail();
-    
-        // Ambil berita terkini (kecuali yang sedang dibuka)
+
         $berita_terkini = Berita_model::with('unit')
             ->where('id_berita', '!=', $id)
             ->orderBy('id_berita', 'DESC')
             ->take(4)
             ->get();
-    
-        // Kunci untuk menyimpan status tampilan berita di session
+
         $key = 'berita_viewed_' . $berita->id_berita;
-    
-        // Tambah views jika belum pernah dilihat di session
         if (!session()->has($key)) {
-            $berita->increment('views'); // Naikkan jumlah view
-            session()->put($key, true);  // Simpan di session supaya tidak nambah terus
+            $berita->increment('views');
+            session()->put($key, true);
         }
-    
-        // Kembalikan tampilan dengan data berita
+
         return view('berita.detail', [
-            'berita' => $berita,
-            'berita_terkini' => $berita_terkini,
-            'title' => $berita->judul
+            'berita'            => $berita,
+            'berita_terkini'    => $berita_terkini,
+            'title'             => $berita->judul
         ]);
-    }    
-    
-    // buletin detail
+    }
+
+    /**
+     * Tampilkan halaman detail buletin
+     */
     public function detailBuletin($id)
     {
-    // Ambil berita beserta relasi unit
-    $buletin = Buletinadmin_model::with('unit')
-               ->where('id_buletin', $id)
-               ->firstOrFail();
+        $buletin = Buletinadmin_model::with('unit')
+                   ->where('id_buletin', $id)
+                   ->firstOrFail();
 
-    // Kunci untuk menyimpan status tampilan berita di session
-    $key = 'buletin_viewed_' . $buletin->id_buletin;
+        $key = 'buletin_viewed_' . $buletin->id_buletin;
+        if (!session()->has($key)) {
+            $buletin->increment('views');
+            session()->put($key, true);
+        }
 
-    // Tambah views jika belum pernah dilihat di session
-    if (!session()->has($key)) {
-        $buletin->increment('views'); // Naikkan jumlah view
-        session()->put($key, true);  // Simpan di session supaya tidak nambah terus
+        return view('buletin.detail', [
+            'buletin' => $buletin,
+            'title'   => $buletin->judul
+        ]);
     }
-
-    // Kembalikan tampilan dengan data berita
-    return view('buletin.detail', [
-        'buletin' => $buletin,
-        'title' => $buletin->judul
-    ]);
-    }
-
-
 }

@@ -32,26 +32,26 @@
     <div class="container mt-5 d-flex">
     <div class="row col-md-12 menuu-manfaat-layanan">
         <div class="card card-layanan col-md-4">
-            <button class="toggle-content" data-target="Penyambungan">
-                <h1>Video Profile</h1>
-            </button>
-        </div>
-        <div class="card card-layanan col-md-4">
-            <button class="toggle-content" data-target="Perubahandaya">
+            <a href="#Buletin" class="btn btn-link text-decoration-none">
                 <h1>Buletin</h1>
-            </button>
+            </a>
         </div>
         <div class="card card-layanan col-md-4">
-            <button class="toggle-content" data-target="Perubahansementara">
+            <a href="#Berita" class="btn btn-link text-decoration-none">
                 <h1>Berita</h1>
-            </button>
+            </a>
+        </div>
+        <div class="card card-layanan col-md-4">
+            <a href="#Video" class="btn btn-link text-decoration-none">
+                <h1>Video</h1>
+            </a>
         </div>
     </div>
 </div>
 
 <!-- PENYAMBUNGAN -->
 @foreach ($youtube as $video)
-<section class="home content-section mt-5" id="Penyambungan">
+<div class="home content-section mt-5" id="Video">
     <div class="container mt-3 d-flex mb-5">
         <div class="row col-md-12 menu-penyambungan">
         <div class="row col-md-6">
@@ -71,145 +71,131 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 @endforeach
 
-<!-- Perubahan Daya -->
-<section class="home content-section" id="Perubahandaya" style="display: none;">
-    <div class="container mt-3 d-flex mb-5">
-        <div class="row col-md-12 menu-penyambungan">
-            <div class="row col-md-6 mt-3">
-                <h3>Perubahan Daya</h3>
-                <h5 class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
-                <div class="menu-penyambungan-detail" style="margin-top: 50px;">
-                    <a class="nav-link-active" aria-current="page" href="#" title="">
-                        Lihat Detail <i class="bi bi-arrow-right-short"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="row col-md-6" style="margin-left: 30px;">
-                <video width="100%" controls>
-                    <source src="video.mp4" type="video/mp4">
-                    Browser Anda tidak mendukung tag video.
-                </video>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Perubahan Sementara -->
-<section class="home content-section" id="Perubahansementara" style="display: none;">
-    <div class="container mt-3 d-flex mb-5">
-        <div class="row col-md-12 menu-penyambungan">
-            <div class="row col-md-6 mt-3">
-                <h3>Penyambungan Sementara</h3>
-                <h5 class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
-                <div class="menu-penyambungan-detail" style="margin-top: 50px;">
-                    <a class="nav-link-active" aria-current="page" href="#" title="">
-                        Lihat Detail<i class="bi bi-arrow-right-short"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="row col-md-6" style="margin-left: 30px;">
-                <video width="100%" controls>
-                    <source src="video.mp4" type="video/mp4">
-                    Browser Anda tidak mendukung tag video.
-                </video>
-            </div>
-        </div>
-    </div>
-</section>
-   
-<!-- Buletin -->
-<div class="container-fluid terusberkembang">
+<!-- BULETIN -->
+<div class="container-fluid terusberkembang" id="Buletin">
     <h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;">Buletin Terkini</h1>
     <hr style="border: none; height: 5px; background-color: #fbfb18; width: 20%; margin: auto; box-shadow: 0px 2px 5px rgba(0,0,0,0.2);">
-    <!-- Bootstrap Carousel -->
-    <div id="newsCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
-        <!-- Navigasi Titik -->
+
+    @php
+        $buletinChunks = $allBuletin->chunk(6);
+    @endphp
+
+    <div id="buletinCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+        
+        <!-- Titik Navigasi -->
         <div class="carousel-indicators carousel-indicators-2">
-            <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="1"></button>
+            @foreach($buletinChunks as $index => $chunk)
+                <button type="button" data-bs-target="#buletinCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></button>
+            @endforeach
         </div>
-        <!-- isi konten slide 1 -->
+
+        <!-- Isi Carousel -->
         <div class="carousel-inner">
-    <div class="carousel-item active">
-        <div class="container mt-4">
-            <div class="row">
-                @foreach($buletins as $buletin)
-                <div class="col-md-4 mb-4">
-                    <div class="news-cardterusbekembang">
-                        <img src="{{ asset('admin/upload/buletin/' . $buletin->gambar) }}" alt="{{ $buletin->judul }}">
-                        <div class="news-textterusbekembang">
-                            <h3>{{ $buletin->judul }}</h3>
-                            <h5>{{ $buletin->unit->nama }}</h5>
-                            <h5 class="text-justify">{{ Str::limit(strip_tags($buletin->isi), 30) }}</h5>
-                            <a class="nav-link-active lihat-detailbuletin" href="{{ route('buletin.detail', $buletin->id_buletin) }}">
-                                Lihat Detail <i class="bi bi-arrow-right-short"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
+            @foreach($buletinChunks as $index => $chunk)
+                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                    <div class="container mt-4">
+                        <div class="row">
+                            @foreach($chunk as $buletin)
+                                <div class="col-md-4 mb-4"> <!-- 3 kolom ke samping (12/4 = 3) -->
+                                    <div class="news-cardterusbekembang h-100 d-flex flex-column">
+                                        <img src="{{ asset('admin/upload/buletin/' . $buletin->gambar) }}" alt="{{ $buletin->judul }}" class="img-fluid">
+                                        <div class="news-textterusbekembang flex-grow-1 d-flex flex-column justify-content-between">
+                                            <div>
+                                                <h3>{{ $buletin->judul }}</h3>
+                                                <h5>{{ $buletin->unit->nama }}</h5>
+                                                <p>{{ Str::limit(strip_tags($buletin->isi), 50) }}</p>
+                                            </div>
+                                            <a class="nav-link-active lihat-detailbuletin mt-3" href="{{ route('buletin.detail', $buletin->id_buletin) }}" style="width:160px;">
+                                                Lihat Detail <i class="bi bi-arrow-right-short"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div> 
+                    </div> 
+                </div> 
+            @endforeach
         </div>
-    </div>
-</div>
-            <!-- navigasi carousel -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+
+        <!-- Tombol Panah -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#buletinCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#buletinCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon"></span>
         </button>
-        </div>
+
     </div>
 </div>
+
+
 <!-- Berita Terkini -->
-<h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;">Berita Terkini</h1>
+<h1 class="layanan-online" style="text-align: center; color: #0d667a; margin-top: 10px;" id="Berita">Berita Terkini</h1>
 <hr style="border: none; height: 5px; background-color: #fbfb18; width: 20%; margin: auto; box-shadow: 0px 2px 5px rgba(0,0,0,0.2);">
+@php
+  $chunks = $allBerita->chunk(6);
+@endphp
 
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators carousel-indicators-2">
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color: #0d667a;"></button>
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2" style="background-color: #0d667a;"></button>
-  </div>
-  
-  <div class="carousel-inner">
-    <!-- Slide 1 -->
-    <div class="carousel-item active">
-    <div class="container mt-4">
-    <div class="row">
-        @foreach($berita as $item)
-        <div class="col-md-6 mb-4">
-            <div class="card-terkiniu">
-                <img src="{{ asset('admin/upload/berita/' . $item->gambar) }}" alt="{{ $item->judul }}" class="img-fluid terkiniu-img">
-                <div class="news-terkiniu">
-                    <span class="text-primary">{{ \Carbon\Carbon::parse($item->tanggal_update)->translatedFormat('d F Y') }}</span>
-                    <a href="{{ route('berita.detail', $item->id_berita) }}" class="berita-title" style="font-weight: bold;">
-                        {{ $item->judul }}
-                    </a>
-                    <p>{{ $item->unit->nama }}</p>
-                    <p class="terkiniu-text">{{ Str::limit(strip_tags($item->isi), 150) }}</p>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-</div>
-    </div>
+    @foreach($chunks as $i => $chunk)
+      <button type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide-to="{{ $i }}"
+              class="{{ $i===0?'active':'' }}"
+              aria-current="{{ $i===0?'true':'false' }}"
+              aria-label="Slide {{ $i+1 }}"
+              style="background-color:#0d667a;"></button>
+    @endforeach
   </div>
 
-  <!-- Carousel controls -->
+  <div class="carousel-inner">
+    @foreach($chunks as $i => $chunk)
+      <div class="carousel-item {{ $i===0?'active':'' }}">
+        <div class="container mt-4">
+          <div class="row">
+            @foreach($chunk as $item)
+              <div class="col-md-6 mb-4">
+                <!-- kartu berita -->
+                <div class="card-terkiniu">
+                  <img src="{{ asset('admin/upload/berita/'.$item->gambar) }}"
+                       alt="{{ $item->judul }}" class="img-fluid terkiniu-img">
+                  <div class="news-terkiniu">
+                    <span class="text-primary">
+                      {{ \Carbon\Carbon::parse($item->tanggal_update)->translatedFormat('d F Y') }}
+                    </span>
+                    <a href="{{ route('berita.detail', $item->id_berita) }}"
+                       class="berita-title" style="font-weight:bold;">
+                      {{ $item->judul }}
+                    </a>
+                    <p>{{ $item->unit->nama }}</p>
+                    <p class="terkiniu-text">
+                      {{ Str::limit(strip_tags($item->isi),150) }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </div>
+      </div>
+    @endforeach
+  </div>
+
+  {{-- Controls --}}
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="carousel-control-prev-icon"></span>
     <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="carousel-control-next-icon"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
 
 @include('layout.footer')

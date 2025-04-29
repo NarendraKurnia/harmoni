@@ -60,22 +60,27 @@ Route::get('user/edit/{id}', 'App\Http\Controllers\Admin\User@edit');
 Route::post('user/proses-edit', 'App\Http\Controllers\Admin\User@proses_edit');
 Route::post('user/delete/{id}', [User::class, 'delete'])->name('user.delete');
 
-// User Berita
-Route::get('berita', 'App\Http\Controllers\Admin\Berita@index');
-Route::get('berita/tambah', 'App\Http\Controllers\Admin\Berita@tambah');
-Route::post('berita/proses-tambah', 'App\Http\Controllers\Admin\Berita@proses_tambah');
-Route::get('berita/edit/{id}', 'App\Http\Controllers\Admin\Berita@edit');
-Route::post('berita/proses-edit', 'App\Http\Controllers\Admin\Berita@proses_edit');
-Route::get('berita/delete/{id}', 'App\Http\Controllers\Admin\Berita@delete');
+// Berita
+Route::get('berita', 'App\Http\Controllers\Admin\Berita@index')->name('berita.index');
+Route::get('berita/tambah', 'App\Http\Controllers\Admin\Berita@tambah')->name('berita.tambah');
+Route::post('berita/proses-tambah', 'App\Http\Controllers\Admin\Berita@proses_tambah')->name('berita.proses_tambah');
+Route::get('berita/edit/{id}', 'App\Http\Controllers\Admin\Berita@edit')->name('berita.edit');
+Route::post('berita/proses-edit', 'App\Http\Controllers\Admin\Berita@proses_edit')->name('berita.proses_edit');
 Route::post('berita/delete/{id}', [Berita::class, 'delete'])->name('berita.delete');
+Route::get('berita/{id}', [App\Http\Controllers\Umum\HomeController::class, 'detailBerita'])
+     ->whereNumber('id')
+     ->name('berita.detail');
 
 // Buletin
-Route::get('buletin', 'App\Http\Controllers\Admin\Buletin@index');
-Route::get('buletin/tambah', 'App\Http\Controllers\Admin\Buletin@tambah');
-Route::post('buletin/proses-tambah', 'App\Http\Controllers\Admin\Buletin@proses_tambah');
-Route::get('buletin/edit/{id}', 'App\Http\Controllers\Admin\Buletin@edit');
-Route::post('buletin/proses-edit', 'App\Http\Controllers\Admin\Buletin@proses_edit');
+Route::get('buletin', 'App\Http\Controllers\Admin\Buletin@index')->name('buletin.index');
+Route::get('buletin/tambah', 'App\Http\Controllers\Admin\Buletin@tambah')->name('buletin.tambah');
+Route::post('buletin/proses-tambah', 'App\Http\Controllers\Admin\Buletin@proses_tambah')->name('buletin.proses_tambah');
+Route::get('buletin/edit/{id}', 'App\Http\Controllers\Admin\Buletin@edit')->name('buletin.edit');
+Route::post('buletin/proses-edit', 'App\Http\Controllers\Admin\Buletin@proses_edit')->name('buletin.proses_edit');
 Route::post('buletin/delete/{id}', [Buletin::class, 'delete'])->name('buletin.delete');
+Route::get('buletin/{id}', [App\Http\Controllers\Umum\HomeController::class, 'detailBuletin'])
+     ->whereNumber('id')
+     ->name('buletin.detail');
 
 // Youtube
 Route::get('youtube', 'App\Http\Controllers\Admin\Youtubeadmin@index');

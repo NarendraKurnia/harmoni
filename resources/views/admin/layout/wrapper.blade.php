@@ -8,6 +8,11 @@
         header('Location: ' . url('dasbor'));
         exit;
     }
+
+    if (request()->segment(1) === 'banner' && session('unit_id') != 18) {
+        header('Location: ' . url('dasbor'));
+        exit;
+    }
 @endphp
 
 @include('admin/layout/head')

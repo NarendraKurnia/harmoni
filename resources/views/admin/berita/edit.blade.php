@@ -17,14 +17,14 @@
 
 <input type="hidden" name="id_berita"	value="{{ $berita->id_berita }}">
                 <div class="form-group row">
-                    <label class="col-md-3 control-label text-right">Nama lengkap</label>
+                    <label class="col-md-3 control-label text-right">Judul Berita</label>
                     <div class="col-md-9">
                         <input type="text" name="judul" class="form-control" placeholder="Judul" value="{{ $berita->judul }}">
                     </div>
                 </div>
                 
                 <div class="form-group row">
-                    <label class="col-md-3 control-label text-right">Isi Proyek</label>
+                    <label class="col-md-3 control-label text-right">Isi Berita</label>
                     <div class="col-md-9">
                         <textarea id="editor" name="isi" class="form-control">{!! old('isi', $berita->isi) !!}</textarea>
                     </div>
