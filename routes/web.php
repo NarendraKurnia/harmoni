@@ -24,6 +24,7 @@ use App\Http\Controllers\Umum\Up3sbuController;
 use App\Http\Controllers\Umum\Up3sbbController;
 use App\Http\Controllers\Umum\Up3sidoarjoController;
 use App\Http\Controllers\Umum\Up3situbondoController;
+use App\Models\Banner_model;
 use Illuminate\Support\Facades\Route;
 
 // Index
@@ -96,6 +97,7 @@ Route::get('banner/tambah', 'App\Http\Controllers\Admin\BannerController@tambah'
 Route::post('banner/proses-tambah', 'App\Http\Controllers\Admin\BannerController@proses_tambah');
 Route::get('banner/edit/{id}', 'App\Http\Controllers\Admin\BannerController@edit');
 Route::post('banner/proses-edit', 'App\Http\Controllers\Admin\BannerController@proses_edit');
+Route::post('banner/delete/{id}', [BannerController::class, 'delete'])->name('banner.delete');
 
 // Berita
 // Route::get('/berita', function () {

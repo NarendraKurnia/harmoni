@@ -47,5 +47,12 @@ class Banner_model extends Model
             ->where('id_banner',$data['id_banner'])
             ->update($data);
     }
+    // hapus
+    public function hapus ($data)
+    {
+        DB::table('banner')
+            ->where('id_banner',$data['id_banner'])
+            ->delete();
+    }
 }
 

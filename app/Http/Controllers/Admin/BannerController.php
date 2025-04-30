@@ -83,7 +83,7 @@ class BannerController extends Controller
 
     // proses edit
 public function proses_edit(Request $request)
-{
+    {
     $m_banner = new Banner_model();
 
     // Ambil id_banner dari form input
@@ -127,5 +127,14 @@ public function proses_edit(Request $request)
     $m_banner->edit($data);
 
     return redirect('banner')->with(['sukses' => 'Data Telah Diedit']);
-}
+    }
+    //  delete
+   public function delete($id)
+   {
+        $m_banner = new Banner_model();
+        $data = ['id_banner' => $id];
+        $m_banner->hapus($data);   
+         
+        return redirect('banner')->with(['sukses' => 'Data Telah Dihapus']);
+   }
 }

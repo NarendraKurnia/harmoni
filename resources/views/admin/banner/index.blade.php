@@ -74,7 +74,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form action="{{ route('user.delete', $banner->id_banner) }}" method="POST">
+                        <form action="{{ route('banner.delete', $banner->id_banner) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-danger">Hapus Data</button>
                         </form>

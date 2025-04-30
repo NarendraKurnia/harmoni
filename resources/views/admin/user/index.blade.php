@@ -7,9 +7,7 @@
         </ul>
     </div>
 @endif
-<!-- <p>
-  @include('admin/user/tambah')
-</p> -->
+
 <form action="{{ asset('user/proses') }}" method="post" accept-charset="utf-8">
 {{ csrf_field() }}
 <div class="row">
