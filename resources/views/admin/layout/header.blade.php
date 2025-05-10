@@ -32,8 +32,8 @@
           <span class="dropdown-item dropdown-header">Menu User</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-  <i class="fas fa-sitemap mr-2"></i> {{ $unit->nama ?? 'Unit Tidak Diketahui' }}
-</a>
+          <i class="fas fa-sitemap mr-2"></i> {{ $unit->nama ?? 'Unit Tidak Diketahui' }}
+          </a>
 
           <div class="dropdown-divider"></div>
           <a href="{{ route('akun.edit') }}" class="dropdown-item">

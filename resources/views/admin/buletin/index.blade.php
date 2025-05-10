@@ -26,16 +26,7 @@
     </div>
     
     <div class="col-md-6">
-        <nav>
-            <ul class="pagination">
-                <li class="page-item active">
-                    <a href="{{ url('admin/prestasi?page=1') }}" class="page-link pb-2 pt-2">1</a>
-                </li>
-                <li class="page-item">
-                    <a href="{{ url('admin/prestasi?page=2') }}" class="page-link pb-2 pt-2">2</a>
-                </li>
-            </ul>
-        </nav>    
+    {{ $buletin->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
     </div>
 </div>
 
@@ -57,7 +48,7 @@
         </tr>
     </thead>
     <tbody>
-        @php $no = 1; @endphp
+        @php $no = ($buletin->currentPage() - 1) * $buletin->perPage() + 1; @endphp
         @foreach($buletin as $buletin)
         <tr>
             <td class="text-center">{{ $no }}</td>

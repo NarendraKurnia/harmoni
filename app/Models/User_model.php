@@ -44,15 +44,14 @@ class User_model extends Model
     
     // login
     public function login($username, $password)
-    {
-        $query = DB::table('Users')
-            ->select('*')
-            ->where('username', $username)
-            ->where('password', sha1($password))
-            ->orderBy('id_user','DESC')
-            ->first();
-        return $query;
-    }
+{
+    $query = DB::table('users')
+    ->select('id_user', 'username', 'nama', 'unit_id', 'password')
+    ->where('username', $username)
+    ->where('password', sha1($password))
+    ->first();
+    return $query;
+}
 
     // edit 
     public function edit ($data)
