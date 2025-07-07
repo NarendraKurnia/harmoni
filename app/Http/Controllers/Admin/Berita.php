@@ -103,7 +103,7 @@ class Berita extends Controller
                   }              
         $m_berita->tambah($data);
         // end proses
-        return redirect('berita')->with(['sukses' => 'Data Telah Ditambah']);
+        return redirect('berita')->with(['sukses' => 'Data Berita Telah Ditambah']);
     }
     // edit
     public function edit($id_berita)

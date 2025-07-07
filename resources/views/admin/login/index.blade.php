@@ -53,7 +53,7 @@
       <hr>
 
       <p class="mb-1 text-center">
-        <a href="{{ asset('') }}">Beranda | </a><a href="{{ asset('lupa-password') }}">Lupa password</a>
+        <a href="{{ asset('') }}">Beranda | </a><a href="{{ asset('password.request') }}">Lupa password</a>
       </p>
     </div>
     <!-- /.login-card-body -->

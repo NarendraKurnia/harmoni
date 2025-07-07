@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Buletin;
 use App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Admin\Youtubeadmin;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\Dasbor;
 use App\Http\Controllers\Umum\HomeController;
 use App\Http\Controllers\Umum\Tentangkami;
 use App\Http\Controllers\Umum\UIDController;
@@ -26,7 +27,55 @@ use App\Http\Controllers\Umum\Up3sidoarjoController;
 use App\Http\Controllers\Umum\Up3situbondoController;
 use App\Models\Banner_model;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\Api\DashboardApiController;
 
+Route::middleware('guest')->group(function () {
+    // Tampil form “Lupa Password”
+    Route::get('forgot-password', function(){
+    return view('admin/layout/wrapper', [
+        'title'   => 'Lupa Password',
+        'content' => 'admin/login/lupa_password'
+    ]);
+})->name('password.request');
+
+    // Proses kirim email reset link
+    Route::post('forgot-password', function (Request $request) {
+        $request->validate(['email' => 'required|email']);
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+        return $status == Password::RESET_LINK_SENT
+            ? back()->with('status', __($status))
+            : back()->withErrors(['email' => __($status)]);
+    })->name('password.email');
+
+    // Tampil form reset password via token
+    Route::view('reset-password/{token}', 'admin.login.reset_password')
+         ->name('password.reset');
+
+    // Proses update password
+    Route::post('reset-password', function (Request $request) {
+        $request->validate([
+            'token'                 => 'required',
+            'email'                 => 'required|email',
+            'password'              => 'required|confirmed|min:6',
+            'password_confirmation' => 'required'
+        ]);
+
+        $status = Password::reset(
+            $request->only('email','password','password_confirmation','token'),
+            function (\App\Models\User $user, $password) {
+                $user->password = bcrypt($password);
+                $user->save();
+            }
+        );
+
+        return $status == Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
+    })->name('password.update');
+});
 // Index
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/berita/{id}', [HomeController::class, 'detailBerita'])->name('berita.detail');
@@ -52,6 +101,7 @@ Route::post('akun', 'App\Http\Controllers\Admin\Login@proses_edit')->name('akun.
 
 // Dasbor
 Route::get('dasbor', 'App\Http\Controllers\Admin\Dasbor@index');
+Route::get('/dashboard/rekap', [DashboardApiController::class, 'rekap']);
 
 // user
 Route::get('user', 'App\Http\Controllers\Admin\User@index');
@@ -60,6 +110,8 @@ Route::post('user/proses-tambah', 'App\Http\Controllers\Admin\User@proses_tambah
 Route::get('user/edit/{id}', 'App\Http\Controllers\Admin\User@edit');
 Route::post('user/proses-edit', 'App\Http\Controllers\Admin\User@proses_edit');
 Route::post('user/delete/{id}', [User::class, 'delete'])->name('user.delete');
+Route::get('user/ganti-password', [User::class, 'ganti_password'])->name('user.ganti_password');
+Route::post('user/ganti-password/proses', [User::class, 'proses_ganti_password'])->name('user.proses_ganti_password');
 
 // Berita
 Route::get('berita', 'App\Http\Controllers\Admin\Berita@index')->name('berita.index');

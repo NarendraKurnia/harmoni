@@ -1,4 +1,4 @@
-@extends('login.layout') {{-- Atau sesuaikan layout jika kamu punya --}}
+@extends('login.layout') 
 
 @section('content')
 <div class="login-box">

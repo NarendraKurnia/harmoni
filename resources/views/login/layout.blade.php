@@ -20,6 +20,7 @@
   <!-- SweetAlert2 -->
   <script src="{{ asset('assets/admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 </head>
+
 <body class="hold-transition login-page">
 
 @include($content)

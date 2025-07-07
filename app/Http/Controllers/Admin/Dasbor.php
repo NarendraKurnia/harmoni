@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berita_model;
 use App\Models\Buletinadmin_model;
-use App\Models\Youtubeadmin_model;   // ▶️ Import model YouTube
+use App\Models\Youtubeadmin_model;   
 use App\Models\Unit;
 use Carbon\Carbon;
 
@@ -14,6 +14,8 @@ class Dasbor extends Controller
 {
     public function index()
     {
+        $unit_id = session()->get('unit_id');
+
         $rekapPerUnit  = [];
         $bulanSekarang = Carbon::now();
         $unit_id       = session('unit_id');
@@ -50,6 +52,9 @@ class Dasbor extends Controller
                     ->whereYear('tanggal_update', $bulanTarget->year)
                     ->count();
 
+                // Ambil data unit
+                $unit = Unit::where('id_unit', $unit_id)->first();
+
                 // 20 poin per upload
                 $point = ($beritaCount + $buletinCount + $youtubeCount) * 20;
                 $totalPointUnit += $point;
@@ -77,9 +82,11 @@ class Dasbor extends Controller
             'title'        => 'Halaman Dasbor',
             'content'      => 'admin/dasbor/index',
             'rekapPerUnit' => $rekapPerUnit,
+            'unit'         => $unit,
             'chartLabels'  => json_encode($chartLabels),
             'chartData'    => json_encode($chartData),
         ]);
     }
+    
 }
 

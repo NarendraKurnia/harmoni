@@ -24,7 +24,7 @@
     </div>
 </div>
 <div class="container">
-	<h2 style="text-align: center; margin-top: 10px;">UID Jawa Timur</h2>
+	<h2 style="text-align: center; margin-top: 10px;">UP3 Bojonegoro</h2>
     <div class="profil-up3sbb">
         <img src="{{ asset('umum/images/foto-up3sbb.jpeg') }}" alt="Profil UP3 SBB" class="profil-img">
     </div>

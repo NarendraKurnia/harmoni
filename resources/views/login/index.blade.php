@@ -1,6 +1,7 @@
+
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ asset('/') }}"><b>LOGIN</b>CBT</a>
+    <a href="{{ asset('/') }}"><b>LOGIN</b>Administrator</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -53,7 +54,7 @@
       <hr>
 
       <p class="mb-1 text-center">
-        <a href="{{ asset('') }}">Beranda | </a><a href="{{ asset('lupa-password') }}">Lupa password</a>
+        <a href="{{ asset('') }}">Beranda | </a><a href="{{ route('password.request') }}">Lupa password?</a>
       </p>
     </div>
     <!-- /.login-card-body -->

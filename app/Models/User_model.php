@@ -2,70 +2,82 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 use Illuminate\Support\Facades\DB;
 
-class User_model extends Model
+class User_model extends Authenticatable implements CanResetPassword
 {
-    use HasFactory;
-    protected $table = 'users';
-    protected $fillable = ['nama', 'email', 'username', 'password', 'unit_id'];
+    use Notifiable, CanResetPasswordTrait;
 
+    protected $table = 'users';
+
+    protected $primaryKey = 'id_user';
+
+    protected $fillable = [
+        'nama', 'email', 'username', 'password', 'unit_id'
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    // Relasi ke Unit
     public function unit()
     {
-    return $this->belongsTo(Unit::class, 'unit_id', 'id_unit'); 
+        return $this->belongsTo(Unit::class, 'unit_id', 'id_unit'); 
     }
 
-    //listing
+    // listing
     public function listing()
     {
-        $query = DB::table('users')
+        return DB::table($this->table)
             ->select('*')
             ->orderBy('id_user','DESC')
             ->get();
-        return $query;
     }
-    // tambah 
+
+    // tambah
     public function tambah ($data)
     {
-        DB::table('users')->insert($data);
+        DB::table($this->table)->insert($data);
     }
+
     // detail
     public function detail($id_user)
     {
-        $query = DB::table('users')
+        return DB::table($this->table)
             ->select('*')
             ->where('id_user', $id_user)
             ->orderBy('id_user','DESC')
             ->first();
-        return $query;
     }
-    
-    // login
-    public function login($username, $password)
-{
-    $query = DB::table('users')
-    ->select('id_user', 'username', 'nama', 'unit_id', 'password')
-    ->where('username', $username)
-    ->where('password', sha1($password))
-    ->first();
-    return $query;
-}
 
-    // edit 
+    // login manual
+    public function login($username, $password)
+    {
+        return DB::table($this->table)
+            ->select('id_user', 'username', 'nama', 'unit_id', 'password')
+            ->where('username', $username)
+            ->where('password', sha1($password)) // sebaiknya pakai bcrypt()
+            ->first();
+    }
+
+    // edit
     public function edit ($data)
     {
-        DB::table('users')
-            ->where('id_user',$data['id_user'])
+        DB::table($this->table)
+            ->where('id_user', $data['id_user'])
             ->update($data);
     }
-    
+
     // hapus
     public function hapus ($data)
     {
-        DB::table('users')
-            ->where('id_user',$data['id_user'])
+        DB::table($this->table)
+            ->where('id_user', $data['id_user'])
             ->delete();
     }
 }

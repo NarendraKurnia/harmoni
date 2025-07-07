@@ -14,13 +14,18 @@ class BannerController extends Controller
     // Index
     public function index(Request $request)
     {
+        $unit_id = session()->get('unit_id');
         // Tidak perlu pakai with('unit') karena tidak ada relasi unit
         $query = Banner_model::orderBy('id_banner', 'DESC');
         $banner = $query->paginate(10); 
-    
+
+        // Ambil data unit
+        $unit = Unit::where('id_unit', $unit_id)->first();
+
         $data = [ 
             'title'   => 'Data Banner',
             'banner'  => $banner,
+            'unit'    => $unit,
             'content' => 'admin/banner/index'
         ];
 
@@ -128,6 +133,7 @@ public function proses_edit(Request $request)
 
     return redirect('banner')->with(['sukses' => 'Data Telah Diedit']);
     }
+    
     //  delete
    public function delete($id)
    {
