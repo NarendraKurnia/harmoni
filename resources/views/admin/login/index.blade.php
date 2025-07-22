@@ -27,12 +27,16 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password" id="passwordInput">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          <!-- Ikon mata -->
+  <span id="togglePassword" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #555; font-size: 14px;">
+    <i class="fa fa-eye"></i>
+  </span>
         </div>
         <div class="row">
           <div class="col-8">
@@ -53,10 +57,27 @@
       <hr>
 
       <p class="mb-1 text-center">
-        <a href="{{ asset('') }}">Beranda | </a><a href="{{ asset('password.request') }}">Lupa password</a>
+        <a href="{{ route('home') }}">Beranda </a>
       </p>
     </div>
     <!-- /.login-card-body -->
   </div>
 </div>
 <!-- /.login-box -->
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('passwordInput');
+
+    togglePassword.addEventListener('click', function () {
+      // Ganti tipe input password/text
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        this.innerHTML = '<i class="fa fa-eye-slash"></i>';
+      } else {
+        passwordInput.type = 'password';
+        this.innerHTML = '<i class="fa fa-eye"></i>';
+      }
+    });
+  });
+</script>

@@ -101,7 +101,7 @@ Route::post('akun', 'App\Http\Controllers\Admin\Login@proses_edit')->name('akun.
 
 // Dasbor
 Route::get('dasbor', 'App\Http\Controllers\Admin\Dasbor@index');
-Route::get('/dashboard/rekap', [DashboardApiController::class, 'rekap']);
+Route::get('api/rekap-dasbor', [DashboardApiController::class, 'rekap']);
 
 // user
 Route::get('user', 'App\Http\Controllers\Admin\User@index');

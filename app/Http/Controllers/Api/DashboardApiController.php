@@ -13,60 +13,61 @@ use Carbon\Carbon;
 class DashboardApiController extends Controller
 {
     public function rekap(Request $request)
-    {
-        $unit_id = $request->input('unit_id', session('unit_id'));
+{
+    $unit_id = session('unit_id');
 
-        $bulanSekarang = Carbon::now();
-        $units = in_array($unit_id, [1, 18])
-            ? Unit::all()
-            : Unit::where('id_unit', $unit_id)->get();
+    $bulanSekarang = Carbon::now();
+    $units = in_array($unit_id, [1, 18])
+        ? Unit::all()
+        : Unit::where('id_unit', $unit_id)->get();
 
-        $result = [];
+    $result = [];
 
-        foreach ($units as $unit) {
-            $total_point = 0;
-            $rekap_bulanan = [];
+    foreach ($units as $unit) {
+        $total_point = 0;
+        $rekap_bulanan = [];
 
-            for ($i = 0; $i < 6; $i++) {
-                $bulanTarget = $bulanSekarang->copy()->subMonths($i);
-                
-                $berita = Berita_model::where('unit_id', $unit->id_unit)
-                    ->whereMonth('tanggal_update', $bulanTarget->month)
-                    ->whereYear('tanggal_update', $bulanTarget->year)
-                    ->count();
+        for ($i = 0; $i < 6; $i++) {
+            $bulanTarget = $bulanSekarang->copy()->subMonths($i);
 
-                $buletin = Buletinadmin_model::where('unit_id', $unit->id_unit)
-                    ->whereMonth('tanggal_update', $bulanTarget->month)
-                    ->whereYear('tanggal_update', $bulanTarget->year)
-                    ->count();
+            $berita = Berita_model::where('unit_id', $unit->id_unit)
+                ->whereMonth('tanggal_update', $bulanTarget->month)
+                ->whereYear('tanggal_update', $bulanTarget->year)
+                ->count();
 
-                $youtube = Youtubeadmin_model::where('unit_id', $unit->id_unit)
-                    ->whereMonth('tanggal_update', $bulanTarget->month)
-                    ->whereYear('tanggal_update', $bulanTarget->year)
-                    ->count();
+            $buletin = Buletinadmin_model::where('unit_id', $unit->id_unit)
+                ->whereMonth('tanggal_update', $bulanTarget->month)
+                ->whereYear('tanggal_update', $bulanTarget->year)
+                ->count();
 
-                $poin = ($berita + $buletin + $youtube) * 20;
-                $total_point += $poin;
+            $youtube = Youtubeadmin_model::where('unit_id', $unit->id_unit)
+                ->whereMonth('tanggal_update', $bulanTarget->month)
+                ->whereYear('tanggal_update', $bulanTarget->year)
+                ->count();
 
-                $rekap_bulanan[] = [
-                    'bulan' => $bulanTarget->translatedFormat('F Y'),
-                    'berita' => $berita,
-                    'buletin' => $buletin,
-                    'youtube' => $youtube,
-                    'point' => $poin
-                ];
-            }
+            $poin = ($berita + $buletin + $youtube) * 20;
+            $total_point += $poin;
 
-            $result[] = [
-                'unit_nama' => $unit->nama,
-                'total_point' => $total_point,
-                'rekap_bulanan' => array_reverse($rekap_bulanan),
+            $rekap_bulanan[] = [
+                'bulan' => $bulanTarget->translatedFormat('F Y'),
+                'berita' => $berita,
+                'buletin' => $buletin,
+                'youtube' => $youtube,
+                'point' => $poin
             ];
         }
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $result
-        ]);
+        $result[] = [
+            'unit_nama' => $unit->nama,
+            'total_point' => $total_point,
+            'rekap_bulanan' => array_reverse($rekap_bulanan),
+        ];
     }
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $result
+    ]);
+}
+
 }
