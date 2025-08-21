@@ -30,52 +30,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Api\DashboardApiController;
 
-Route::middleware('guest')->group(function () {
-    // Tampil form “Lupa Password”
-    Route::get('forgot-password', function(){
-    return view('admin/layout/wrapper', [
-        'title'   => 'Lupa Password',
-        'content' => 'admin/login/lupa_password'
-    ]);
-})->name('password.request');
-
-    // Proses kirim email reset link
-    Route::post('forgot-password', function (Request $request) {
-        $request->validate(['email' => 'required|email']);
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-        return $status == Password::RESET_LINK_SENT
-            ? back()->with('status', __($status))
-            : back()->withErrors(['email' => __($status)]);
-    })->name('password.email');
-
-    // Tampil form reset password via token
-    Route::view('reset-password/{token}', 'admin.login.reset_password')
-         ->name('password.reset');
-
-    // Proses update password
-    Route::post('reset-password', function (Request $request) {
-        $request->validate([
-            'token'                 => 'required',
-            'email'                 => 'required|email',
-            'password'              => 'required|confirmed|min:6',
-            'password_confirmation' => 'required'
-        ]);
-
-        $status = Password::reset(
-            $request->only('email','password','password_confirmation','token'),
-            function (\App\Models\User $user, $password) {
-                $user->password = bcrypt($password);
-                $user->save();
-            }
-        );
-
-        return $status == Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
-    })->name('password.update');
-});
 // Index
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/berita/{id}', [HomeController::class, 'detailBerita'])->name('berita.detail');
@@ -184,4 +138,8 @@ Route::prefix('profil')->group(function () {
     Route::get('/up3ponorogo', [Up3ponorogoController::class, 'ponorogo'])->name('profil.up3ponorogo');
     Route::get('/up3situbondo', [Up3situbondoController::class, 'situbondo'])->name('profil.up3situbondo');
 });
+
+Route::get('/ai-news', [App\Http\Controllers\Umum\AInewsController::class, 'index'])->name('ai-news.index');
+
+
 

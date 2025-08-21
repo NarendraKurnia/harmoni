@@ -109,6 +109,15 @@
         });
     });
 </script>
-
+<script>
+document.getElementById('searchInput').addEventListener('keyup', function () {
+    let q = this.value.toLowerCase();
+    let items = document.querySelectorAll('#newsList div.border');
+    items.forEach(div => {
+        let text = div.innerText.toLowerCase();
+        div.style.display = text.includes(q) ? '' : 'none';
+    });
+});
+</script>
 </body>
 </html>

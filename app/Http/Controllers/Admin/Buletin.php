@@ -33,10 +33,10 @@ class Buletin extends Controller
            });
        }
 
-       // Ambil data berita dengan pagination
+       // data berita dengan pagination
        $buletin = $query->paginate(10); 
 
-       // Ambil unit berdasarkan session
+       // unit berdasarkan session
         $unit_id = session()->get('unit_id');
         $unit = Unit::where('id_unit', $unit_id)->first();
 
@@ -55,11 +55,9 @@ class Buletin extends Controller
    {
        $unit_id = session('unit_id');
 
-       // Admin (unit_id 18) bisa lihat semua unit
         if ($unit_id == 18) {
             $units = \App\Models\Unit::select('id_unit', 'nama')->get();
         } else {
-            // User biasa hanya bisa lihat unitnya sendiri
             $units = \App\Models\Unit::select('id_unit', 'nama')->where('id_unit', $unit_id)->get();
         }
        
