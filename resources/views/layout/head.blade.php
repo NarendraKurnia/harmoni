@@ -10,7 +10,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('umum/css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-
+<!-- Tailwind CSS -->
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- Icon & Fonts -->
     <link rel="icon" href="{{ asset('umum/images/Logo_PLN.png') }}">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">

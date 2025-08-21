@@ -1,18 +1,8 @@
 @include('layout.head')
 @include('layout.header')
 
-<div class="container py-4">
+<div class="container max-w-6xl py-4 mt-4">
     <h2 class="mb-4">{{ $title ?? 'AI News' }}</h2>
-
-    {{-- Debug JSON --}}
-    <details style="margin-bottom:12px;">
-      <summary>Debug: show articles JSON (click)</summary>
-      <pre style="white-space:pre-wrap; background:#f7f7f7; padding:12px; border-radius:6px;">
-{!! json_encode($articles, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
-      </pre>
-    </details>
-
-    {{-- Normalisasi seperti di atas --}}
     @php
         $normalized = [];
         if (!empty($articles) && is_array($articles)) {
